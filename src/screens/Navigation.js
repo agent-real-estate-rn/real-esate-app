@@ -6,58 +6,58 @@ import Conversation from './Conversation';
 import User from './User';
 import Chat from './Chat';
 
-const UserStack = createStackNavigator({
-  Login: {
-    screen: User
-  },
-  chat: {
-    screen: Chat
-  }
-}, {
-  navigationOptions: {
-    title: 'User'
-  }
-});
+// const UserStack = createStackNavigator({
+//   Login: {
+//     screen: User
+//   },
+//   chat: {
+//     screen: Chat
+//   }
+// }, {
+//   navigationOptions: {
+//     title: 'User'
+//   }
+// });
 
-const ConversationStack = createStackNavigator({
-  conversation: {
-    screen: Conversation
-  },
-  chat: {
-    screen: Chat
-  }
-}, {
-  navigationOptions: {
-    title: 'Conversation'
-  }
-});
+// const ConversationStack = createStackNavigator({
+//   conversation: {
+//     screen: Conversation
+//   },
+//   chat: {
+//     screen: Chat
+//   }
+// }, {
+//   navigationOptions: {
+//     title: 'Conversation'
+//   }
+// });
 
-const Tabs = createBottomTabNavigator({
-  Conversation: {
-    screen: ConversationStack,
-    navigationOptions: {
-      tabBarLabel: 'Conversation',
-      tabBarIcon: ({tintColor}) =>( <Icon name='chat' type='material_community' color={tintColor} />)
-    }
-  },
-  User: {
-    screen: UserStack,
-    navigationOptions: {
-      tabBarLabel: 'User',
-      tabBarIcon: ({tintColor}) =>( <Icon name='person-outline' type='material_community' color={tintColor} />)
-    }
-  }
-}, {
-  labeled: true,
-  initialRouteName: 'Conversation',
-});
+// const Tabs = createBottomTabNavigator({
+//   Conversation: {
+//     screen: ConversationStack,
+//     navigationOptions: {
+//       tabBarLabel: 'Conversation',
+//       tabBarIcon: ({tintColor}) =>( <Icon name='chat' type='material_community' color={tintColor} />)
+//     }
+//   },
+//   User: {
+//     screen: UserStack,
+//     navigationOptions: {
+//       tabBarLabel: 'User',
+//       tabBarIcon: ({tintColor}) =>( <Icon name='person-outline' type='material_community' color={tintColor} />)
+//     }
+//   }
+// }, {
+//   labeled: true,
+//   initialRouteName: 'Conversation',
+// });
 
 const MainStack = createStackNavigator({
   Login: {
     screen: Login
   },
-  Tabs: {
-    screen: Tabs
+  Signup: {
+    screen: Signup
   }
 }, {
   initialRouteName: 'Login',
