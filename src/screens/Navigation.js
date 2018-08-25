@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { createBottomTabNavigator, createStackNavigator } from 'react-navigation';
 import { Icon } from 'react-native-elements';
-import Login from './Login';
-import Conversation from './Conversation';
-import User from './User';
-import Chat from './Chat';
+import LoginScreen from './Login';
+import Signup from './Signup';
+// import Conversation from './Conversation';
+// import User from './User';
+// import Chat from './Chat';
 
 // const UserStack = createStackNavigator({
 //   Login: {
@@ -53,14 +54,14 @@ import Chat from './Chat';
 // });
 
 const MainStack = createStackNavigator({
-  Login: {
-    screen: Login
+  LoginScreen: {
+    screen: LoginScreen
   },
   Signup: {
     screen: Signup
   }
 }, {
-  initialRouteName: 'Login',
+  initialRouteName: 'LoginScreen',
   headerMode: 'none',
   navigationOptions: {
     headerVisible: false,

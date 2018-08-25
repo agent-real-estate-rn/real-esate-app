@@ -1,4 +1,4 @@
-export default user = (state= {}, action) => {
+export default login = (state= {}, action) => {
   switch (action.type) {
     default:
       return state;

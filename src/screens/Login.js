@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import { Button, View, TextInput, Text, KeyboardAvoidingView, ActivityIndicator } from 'react-native';
+import { StyleSheet, Button, View, TextInput, Text, KeyboardAvoidingView, ActivityIndicator } from 'react-native';
 import { connect } from 'react-redux';
-import mapDispatchToProps from '../actions';
+import mapDispatchToLoginProps from '../actions/login';
 import loginStyle from '../style/login';
 
-class Login extends Component {
+class LoginScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -20,7 +20,7 @@ class Login extends Component {
 
   render() {
     return (
-      <View style={loginStyle.outter}>
+      <View style={loginStyle.outer}>
         <View style={loginStyle.wrap}>
           <View style={loginStyle.textWrap}>
             <View style={loginStyle.textInner}>
@@ -64,10 +64,10 @@ class Login extends Component {
 }
 
 const mapStateToProps = function(state) {
-  return {...state.login}
+  return {...state}
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToLoginProps
-)(Login);
+)(LoginScreen);
