@@ -1,64 +1,68 @@
 import React, { Component } from 'react';
-import { createBottomTabNavigator, createStackNavigator } from 'react-navigation';
+import { createBottomTabNavigator, createStackNavigator, createSwitchNavigator } from 'react-navigation';
 import { Icon } from 'react-native-elements';
 import LoginScreen from './Login';
-import Signup from './Signup';
-// import Conversation from './Conversation';
-// import User from './User';
-// import Chat from './Chat';
+import SignupScreen from './Signup';
+import SubscriptionScreen from './SubscriptionScreen';
+import PropertyDetailScreen from './PropertyDetailScreen';
+import SearchScreen from './SearchScreen';
 
-// const UserStack = createStackNavigator({
-//   Login: {
-//     screen: User
-//   },
-//   chat: {
-//     screen: Chat
-//   }
-// }, {
-//   navigationOptions: {
-//     title: 'User'
-//   }
-// });
 
-// const ConversationStack = createStackNavigator({
-//   conversation: {
-//     screen: Conversation
-//   },
-//   chat: {
-//     screen: Chat
-//   }
-// }, {
-//   navigationOptions: {
-//     title: 'Conversation'
-//   }
-// });
+const SubscriptionStack = createStackNavigator({
+  SubscriptionScreen: {
+    screen: SubscriptionScreen
+  },
+  PropertyDetailScreen: {
+    screen: PropertyDetailScreen
+  }
+}, {
+  navigationOptions: {
+    title: 'My Subscription'
+  }
+});
 
-// const Tabs = createBottomTabNavigator({
-//   Conversation: {
-//     screen: ConversationStack,
-//     navigationOptions: {
-//       tabBarLabel: 'Conversation',
-//       tabBarIcon: ({tintColor}) =>( <Icon name='chat' type='material_community' color={tintColor} />)
-//     }
-//   },
-//   User: {
-//     screen: UserStack,
-//     navigationOptions: {
-//       tabBarLabel: 'User',
-//       tabBarIcon: ({tintColor}) =>( <Icon name='person-outline' type='material_community' color={tintColor} />)
-//     }
-//   }
-// }, {
-//   labeled: true,
-//   initialRouteName: 'Conversation',
-// });
+const SearchStack = createStackNavigator({
+  SearchScreen: {
+    screen: SearchScreen
+  },
+  PropertyDetailScreen: {
+    screen: PropertyDetailScreen
+  }
+}, {
+  navigationOptions: {
+    title: 'Search'
+  }
+});
 
-const MainStack = createStackNavigator({
+const Tabs = createBottomTabNavigator({
+  SubscriptionStack: {
+    screen: SubscriptionStack,
+    navigationOptions: {
+      tabBarLabel: 'Conversation',
+      tabBarIcon: ({tintColor}) =>( <Icon name='chat' type='material_community' color={tintColor} />)
+    }
+  },
+  SearchStack: {
+    screen: SearchStack,
+    navigationOptions: {
+      tabBarLabel: 'Search',
+      tabBarIcon: ({tintColor}) =>( <Icon name='person-outline' type='material_community' color={tintColor} />)
+    }
+  }
+}, {
+  labeled: true,
+  initialRouteName: 'SearchStack',
+});
+
+const MainStack = createSwitchNavigator({
   LoginScreen: {
     screen: LoginScreen
   },
-  Signup: {
-    screen: Signup
+  SignupScreen: {
+    screen: SignupScreen
+  },
+  Tabs: {
+    screen: Tabs
   }
 }, {
   initialRouteName: 'LoginScreen',

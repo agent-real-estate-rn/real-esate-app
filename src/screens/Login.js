@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { StyleSheet, Button, View, TextInput, Text, KeyboardAvoidingView, ActivityIndicator } from 'react-native';
+import { Button, View, TextInput, Text, KeyboardAvoidingView, ActivityIndicator } from 'react-native';
 import { connect } from 'react-redux';
 import mapDispatchToLoginProps from '../actions/login';
 import loginStyle from '../style/login';
@@ -12,10 +12,17 @@ class LoginScreen extends Component {
       password: ''
     };
     this.handelClick = this.handelClick.bind(this);
+    this.goToSignup = this.goToSignup.bind(this);
   }
 
   handelClick() {
-    this.props.login(this.props.navigation, this.state.name, this.state.password);
+    // this.props.login(this.props.navigation, this.state.name, this.state.password);
+    this.props.navigation.navigate('Tabs');
+  }
+
+  goToSignup() {
+    console.log(this.props);
+    this.props.navigation.navigate('SignupScreen');
   }
 
   render() {
@@ -28,7 +35,7 @@ class LoginScreen extends Component {
               <ActivityIndicator
                 size="large"
                 animating={this.props.isLoading}/>
-              {this.props.name ? (<Text>Welcome {this.props.name}</Text>) :(<Text > </Text>)}
+              {this.props.name ? (<Text>Welcome</Text>) :(<Text > </Text>)}
             </View>
           </View>
           <View style={loginStyle.inputWrap}>
@@ -55,6 +62,7 @@ class LoginScreen extends Component {
                 <Button title='Login' onPress={ this.handelClick} />
               </View>
             </View>
+            <Button title='Signup' onPress={ this.goToSignup} />
           </View>
         </View>
         <KeyboardAvoidingView behavior="padding" enabled></KeyboardAvoidingView>
