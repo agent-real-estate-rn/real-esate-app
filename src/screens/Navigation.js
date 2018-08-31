@@ -72,10 +72,4 @@ const MainStack = createSwitchNavigator({
   }
 });
 
-export default class MainApp extends React.Component {
-  render() {
-    return(
-      <MainStack/>
-    )
-  }
-}
+export default MainStack;

@@ -11,6 +11,8 @@ import { connect } from "react-redux";
 import mapDispatchToLoginProps from "../actions/login";
 import loginStyle from "../style/login";
 import firebase from "../firebase";
+import Expo from 'expo';
+import firebase from '../firebase';
 
 class LoginScreen extends Component {
   constructor(props) {
@@ -23,8 +25,15 @@ class LoginScreen extends Component {
     this.handleClick = this.handleClick.bind(this);
     this.goToSignup = this.goToSignup.bind(this);
   }
+  componentDidMount() {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user != null) {
+        this.props.navigation.navigate('Tabs');
+      }
+    });
+  }
 
-  handleClick() {
+  handleClickAAA() {
     // this.props.login(this.props.navigation, this.state.name, this.state.password);
     try {
       firebase
@@ -37,8 +46,24 @@ class LoginScreen extends Component {
     } catch (error) {
       console.log(error.toString());
     }
+  }
 
-    
+  async handelClick() {
+    const { type, token } = await Expo.Facebook.logInWithReadPermissionsAsync('1952254625024149', {
+        permissions: ['public_profile'],
+      });
+    if (type === 'success') {
+      // Get the user's name using Facebook's Graph API
+      const response = await fetch(
+        `https://graph.facebook.com/me?access_token=${token}`);
+      const dagta = (await response.json());
+      console.log(dagta);
+
+      let credential = firebase.auth.FacebookAuthProvider.credential(token);
+      firebase.auth().signInWithCredential(credential).catch((error) => {
+        console.log(err);
+      });
+    }
   }
 
   goToSignup() {
@@ -52,7 +77,7 @@ class LoginScreen extends Component {
         <View style={loginStyle.wrap}>
           <View style={loginStyle.textWrap}>
             <View style={loginStyle.textInner}>
-              <Text style={loginStyle.textTitle}>iMess</Text>
+              <Text style={loginStyle.textTitle}>Agent</Text>
               <ActivityIndicator
                 size="large"
                 animating={this.props.isLoading}
