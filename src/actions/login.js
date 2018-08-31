@@ -2,11 +2,14 @@ import firebase from '../firebase';
 
 export default function mapDispatchToLoginProps(dispatch) {
   return {
-    login: (username, password) => {
+    loginByUsernamePassword: (username, password) => {
       dispatch({
         type: 'LOGIN_ING'
       })
       return loginBusiness(dispatch)(username, password);
+    },
+    loginByFacebook: () => {
+
     }
   }
 }
