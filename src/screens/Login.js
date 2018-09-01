@@ -12,7 +12,6 @@ import mapDispatchToLoginProps from "../actions/login";
 import loginStyle from "../style/login";
 import firebase from "../firebase";
 import Expo from 'expo';
-import firebase from '../firebase';
 
 class LoginScreen extends Component {
   constructor(props) {
@@ -48,16 +47,16 @@ class LoginScreen extends Component {
     }
   }
 
-  async handelClick() {
+  async handleClick() {
     const { type, token } = await Expo.Facebook.logInWithReadPermissionsAsync('1952254625024149', {
         permissions: ['public_profile'],
       });
     if (type === 'success') {
       // Get the user's name using Facebook's Graph API
-      const response = await fetch(
-        `https://graph.facebook.com/me?access_token=${token}`);
-      const dagta = (await response.json());
-      console.log(dagta);
+      // const response = await fetch(
+      //   `https://graph.facebook.com/me?access_token=${token}`);
+      // const dagta = (await response.json());
+      // console.log(dagta);
 
       let credential = firebase.auth.FacebookAuthProvider.credential(token);
       firebase.auth().signInWithCredential(credential).catch((error) => {

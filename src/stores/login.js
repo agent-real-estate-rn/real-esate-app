@@ -1,4 +1,4 @@
-const initialState = {isLoading: false, uid: '', userInfo};
+const initialState = {isLoading: false, uid: '', userInfo: {}};
 
 export default login = (state= initialState, action) => {
   switch (action.type) {
