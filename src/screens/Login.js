@@ -10,8 +10,9 @@ import {
 import { connect } from "react-redux";
 import mapDispatchToLoginProps from "../actions/login";
 import loginStyle from "../style/login";
-import firebase from "../firebase";
 import Expo from 'expo';
+
+
 
 class LoginScreen extends Component {
   constructor(props) {
@@ -21,48 +22,22 @@ class LoginScreen extends Component {
       email: "",
       password: ""
     };
-    this.handleClick = this.handleClick.bind(this);
+    this.handleLoginEmail = this.handleLoginEmail.bind(this);
+    this.handleLoginFB = this.handleLoginFB.bind(this);
     this.goToSignup = this.goToSignup.bind(this);
   }
+
   componentDidMount() {
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user != null) {
-        this.props.navigation.navigate('Tabs');
-      }
-    });
+    this.props.loginAuto(this.props.navigation)
+
   }
 
-  handleClickAAA() {
-    // this.props.login(this.props.navigation, this.state.name, this.state.password);
-    try {
-      firebase
-        .auth()
-        .signInWithEmailAndPassword(this.state.email, this.state.password)
-        .then(data => {
-          console.log("User Info: ", data);
-          this.props.navigation.navigate("Tabs");
-        });
-    } catch (error) {
-      console.log(error.toString());
-    }
+  handleLoginEmail() {
+    this.props.loginByUsernamePassword(this.state.email, this.state.password, this.props.navigation, );
   }
 
-  async handleClick() {
-    const { type, token } = await Expo.Facebook.logInWithReadPermissionsAsync('1952254625024149', {
-        permissions: ['public_profile'],
-      });
-    if (type === 'success') {
-      // Get the user's name using Facebook's Graph API
-      // const response = await fetch(
-      //   `https://graph.facebook.com/me?access_token=${token}`);
-      // const dagta = (await response.json());
-      // console.log(dagta);
-
-      let credential = firebase.auth.FacebookAuthProvider.credential(token);
-      firebase.auth().signInWithCredential(credential).catch((error) => {
-        console.log(err);
-      });
-    }
+  handleLoginFB() {
+    this.props.loginByFacebook()
   }
 
   goToSignup() {
@@ -106,9 +81,9 @@ class LoginScreen extends Component {
                 textContentType="password"
               />
               <View style={loginStyle.buttonWrap}>
-                <Button title="Login" onPress={this.handleClick}
-                />
+                <Button title="Login" onPress={this.handleLoginEmail}/>
               </View>
+              <Button title="LoginFB" onPress={this.handleLoginFB} />
             </View>
             <Button title="Signup" onPress={this.goToSignup} />
           </View>
