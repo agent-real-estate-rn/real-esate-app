@@ -55,17 +55,17 @@ const Tabs = createBottomTabNavigator({
 });
 
 const MainStack = createSwitchNavigator({
-  LoginScreen: {
-    screen: LoginScreen
-  },
-  SignupScreen: {
-    screen: SignupScreen
-  },
+  // LoginScreen: {
+  //   screen: LoginScreen
+  // },
+  // SignupScreen: {
+  //   screen: SignupScreen
+  // },
   Tabs: {
     screen: Tabs
   }
 }, {
-  initialRouteName: 'LoginScreen',
+  initialRouteName: 'Tabs',
   headerMode: 'none',
   navigationOptions: {
     headerVisible: false,
