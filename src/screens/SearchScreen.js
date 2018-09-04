@@ -1,60 +1,62 @@
 import React, { Component } from 'react';
-import {
-  StyleSheet,
-  View,
-  TouchableOpacity
-} from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
+import styles from '../style/searchscreen';
 import { connect } from "react-redux";
 import MapView from 'react-native-maps';
 import geolib from 'geolib';
 import _ from 'lodash';
 import { Icon } from 'react-native-elements';
 import mapDispatchToSearchProps from '../actions/search';
-import DropdownMenu from '../Components/DropdownMenu';
+import Loading from '../Components/Loading';
+
 
 class SearchScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      location: null,
+      location: {
+        loading: false,
+        latitude: 10.7623717,
+        longitude: 106.7061763,
+        latitudeDelta: 0.04292,
+        longitudeDelta: 0.03021
+      },
       markers: [],
       panDrag: [],
       polygon: [],
+      marginBottom: 0
     };
     this.getCurrentLocation = this.getCurrentLocation.bind(this);
     this.toggleDrawOnMap = this.toggleDrawOnMap.bind(this);
     this.filterMarker = this.filterMarker.bind(this);
-
-    this.drawPolygon = _.throttle(this.drawPolygon, 100);
-  }
-  componentWillMount() {
-    setTimeout(() => {
-      this.setState({
-        statusBarHeight: 1
-      });
-    }, 500);
-  }
-
-  componentDidMount() {
-    this.getCurrentLocation();
+    this.map;
+    this.drawPolygon = _.throttle(this.drawPolygon, 140);
   }
 
   getCurrentLocation() {
-    navigator.geolocation.getCurrentPosition(({coords}) => {
-      const myLocation = {
-        latitude: coords.latitude,
-        longitude: coords.longitude,
-        latitudeDelta: 0.0922,
-        longitudeDelta: 0.0421
-      }
-      let markMyPlace = {
-        coordinate: myLocation
-      };
-      this.setState({
-        location: myLocation,
-        markers: [markMyPlace]
-      });
-    });
+    try {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          console.log(position);
+          const region = {
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+            latitudeDelta: 0.04292,
+            longitudeDelta: 0.03021
+          };
+          this.setRegion(region);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    } catch(e) {
+      console.log(e.message || "");
+    }
+  }
+
+  setRegion(region) {
+    this.map.animateToRegion(region);
   }
 
   toggleDrawOnMap() {
@@ -97,12 +99,14 @@ class SearchScreen extends Component {
   render() {
     return (
       <View style = {styles.wrapScreen}>
-        <MapView style = {{flex: 1}}
-          initialRegion = {this.state.location}
+        <MapView
+          style = {{flex: 1, marginBottom: 0}}
+          initialRegion={this.state.location} 
           showsUserLocation = {true}
           showsMyLocationButton = {true}
           scrollEnabled = {!this.state.isDrawing}
           onPanDrag = {e => this.panDragMap(e)}
+          ref={(map) => this.map = map}
         >
           {this.state.markers.map((marker, key) => (
               <MapView.Marker key = {key}
@@ -118,17 +122,31 @@ class SearchScreen extends Component {
           }
           </MapView>
         <TouchableOpacity
-          style = {styles.drawButton}
+          activeOpacity={0.8}
+          style = {[styles.absoluteBtn, styles.drawButton]}
           onPress = {this.toggleDrawOnMap}
         >
-          <Icon name = 'brush' type = 'material_community' containerStyle = {styles.drawIcon}/>
+          <Icon name ={!this.state.isDrawing ? 'brush' : 'highlight-off'} type = 'material_community' containerStyle = {styles.icon}/>
         </TouchableOpacity>
-        <DropdownMenu style={{
-          position: 'absolute',
-          left: 10,
-          top: 20,
-          width: 360, backgroundColor: '#fff'}}
-          textStyle={{padding: 20}}/>
+        {
+          this.state.isDrawing && this.state.panDrag.length > 3 &&
+          <TouchableOpacity
+            activeOpacity={0.8}
+            style = {[styles.absoluteBtn, styles.doneBtn]}
+            onPress = {this.getCurrentLocation}
+          ><Icon name ='done-all' type = 'material_community' containerStyle = {styles.icon}/>
+          </TouchableOpacity>
+        }
+        {
+          this.state.polygon.length > 3 && this.state.isDrawing && 
+          <TouchableOpacity
+            activeOpacity={0.8}
+            style = {[styles.absoluteBtn, styles.getListBtn]}
+            onPress = {this.getCurrentLocation}
+          ><Text>Get properties list!</Text>
+          </TouchableOpacity>
+        }
+        {this.state.loading && <Loading/>}
       </View>
       )
     }
@@ -143,32 +161,3 @@ class SearchScreen extends Component {
     mapStateToProps,
     mapDispatchToSearchProps
   )(SearchScreen);
-
-  const styles = StyleSheet.create({
-    wrapScreen: {
-      flex: 1,
-      position: 'relative',
-      marginTop: 1
-    },
-    drawButton: {
-      position: 'absolute',
-      right: 10,
-      top: 20,
-      width: 60,
-      height: 60,
-      borderRadius: 30,
-      zIndex: 3,
-      backgroundColor: '#f8f8f8',
-      shadowColor: 'rgba(0,0,0,.15)',
-      shadowOffset: {
-        width: 1,
-        height: 2
-      },
-      shadowOpacity: 0.8,
-      shadowRadius: 2
-    },
-    drawIcon: {
-      paddingLeft: 3,
-      paddingTop: 18
-    }
-  })
