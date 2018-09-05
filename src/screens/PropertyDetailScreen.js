@@ -16,16 +16,19 @@ export default class PropertyDetailScreen extends Component {
 
   onLayout() {
     this.setState({ screen: Dimensions.get("window") });
+    console.log('this is onLayout screen dimensions ', this.state.screen);
+    
   }
 
   render() {
-    const { address, description, contactInfo } = TEST_DATA.result[0];
+    const { address, description, contactInfo } = TEST_DATA.propertyList[0];
+ 
     return (
       <View style={styles.componentContainer} onLayout={this.onLayout}>
         <ScrollView vertical>
           <View style={styles.wrapCarousel}>
             <Carousel
-              images={TEST_DATA.result[0].imgUrl}
+              images={TEST_DATA.propertyList[0].imgUrl}
               imageStyle={{
                 width: this.state.screen.width,
                 height: (this.state.screen.width * 9) / 16
@@ -71,7 +74,7 @@ export default class PropertyDetailScreen extends Component {
               Email: {contactInfo.email}
             </Text>
             <Text style={{ marginTop: 5, fontWeight: "bold" }}>
-              Phone: {contactInfo.phone_number}
+              Phone: {contactInfo.phoneNumber}
             </Text>
           </View>
         </ScrollView>

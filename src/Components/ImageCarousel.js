@@ -2,7 +2,7 @@ import React from 'react';
 import { View, ScrollView, Image,  Dimensions, Animated } from "react-native";
 import styles from '../style/propertyDetailStyle';
 
-class Carousel extends React.Component {
+export default class Carousel extends React.Component {
   scrollX = new Animated.Value(0);
   constructor(props) {
     super(props);
@@ -37,8 +37,8 @@ class Carousel extends React.Component {
           scrollEventThrottle={16}
           showsHorizontalScrollIndicator={false}
         >
-          {this.props.images.map(image => (
-            <Image style={this.state.imageStyle} source={{ uri: image }} key={Math.random().toString(36).substr(2, 9)} />
+          {this.props.images.map(image => ( // Image style changed from this.state.imageStyle -- ?? Also image carousel should be bigger
+            <Image style={this.props.imageStyle} source={{ uri: image }} key={Math.random().toString(36).substr(2, 9)} />
           ))}
         </ScrollView>
         <View style={{ flexDirection: "row" }} >
