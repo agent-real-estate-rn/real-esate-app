@@ -21,7 +21,7 @@ export default class ListView extends Component {
       <View style={styles.container} onLayout = {this.onLayout.bind(this)}>
          <FlatList
          style={styles.flatList}
-          data={TEST_DATA}
+          data={TEST_DATA.result}
           keyExtractor={item => item.id.toString()}
           renderItem={({ item }) => (
             <Card {...item} navigation={this.props.navigation} />

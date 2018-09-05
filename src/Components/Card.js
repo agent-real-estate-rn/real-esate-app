@@ -23,7 +23,7 @@ export default class Card extends Component {
           source={{ uri: this.props.imgUrl[0] }}
         />
         <View style={styles.cardDesc}>
-          <Text style={styles.building}>{this.props.description.building_name}</Text>
+          <Text style={styles.building}>{this.props.description.buildingName}</Text>
           <Text>{this.props.address.street} - {this.props.address.district} {this.props.address.city}</Text>
           <Text>${this.props.description.price}/month | {this.props.description.bdrm} bdrm | {this.props.description.bdrm} bath | {this.props.description.size}</Text>
         </View>

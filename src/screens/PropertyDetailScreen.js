@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Text, View, ScrollView, Image, StyleSheet, Dimensions, StatusBar, Animated } from "react-native";
-import TEST_DATA from "../listingsArray.json";
+import TEST_DATA from "../listingArray.json";
 import styles from '../style/propertyDetailStyle';
 import Carousel from '../Components/ImageCarousel';
 
@@ -19,13 +19,13 @@ export default class PropertyDetailScreen extends Component {
   }
 
   render() {
-    const { address, description, contact_info } = TEST_DATA[0];
+    const { address, description, contactInfo } = TEST_DATA.result[0];
     return (
       <View style={styles.componentContainer} onLayout={this.onLayout}>
         <ScrollView vertical>
           <View style={styles.wrapCarousel}>
             <Carousel
-              images={TEST_DATA[0].imgUrl}
+              images={TEST_DATA.result[0].imgUrl}
               imageStyle={{
                 width: this.state.screen.width,
                 height: (this.state.screen.width * 9) / 16
@@ -33,7 +33,7 @@ export default class PropertyDetailScreen extends Component {
             />
           </View>
           <View style={styles.wrapDescription}>
-            <Text style={styles.building}>{description.building_name}</Text>
+            <Text style={styles.building}>{description.buildingName}</Text>
             <Text style={styles.address}>
               {address.street} - {address.district} {address.city}
             </Text>
@@ -45,31 +45,33 @@ export default class PropertyDetailScreen extends Component {
               }}
             />
 
-            <View style={styles.propInfoWrap}>
-              <View style={styles.priceWrap}>
-                <Text style={styles.propInfo}>{`$ ${description.price}`}</Text>
-                <Text style={styles.propText}>Price</Text>
+            {//Property information group
+              <View style={styles.propInfoWrap}>
+                <View style={styles.priceWrap}>
+                  <Text style={styles.propInfo}>{`$ ${description.price}`}</Text>
+                  <Text style={styles.propText}>Price</Text>
+                </View>
+                <View style={styles.bedsWrap}>
+                  <Text style={styles.propInfo}>{`${description.bdrm}`}</Text>
+                  <Text style={styles.propText}>Beds</Text>
+                </View>
+                <View style={styles.bathWrap}>
+                  <Text style={styles.propInfo}>{`${description.bdrm}`}</Text>
+                  <Text style={styles.propText}>Baths</Text>
+                </View>
+                <View style={styles.sizeWrap}>
+                  <Text style={styles.propInfo}>{`${description.size}`}</Text>
+                  <Text style={styles.propText}>Sq. m</Text>
+                </View>
               </View>
-              <View sytle={styles.bedsWrap}>
-                <Text style={styles.propInfo}>{`${description.bdrm}`}</Text>
-                <Text style={styles.propText}>Beds</Text>
-              </View>
-              <View style={styles.bathWrap}>
-                <Text style={styles.propInfo}>{`${description.bdrm}`}</Text>
-                <Text style={styles.propText}>Baths</Text>
-              </View>
-              <View style={styles.sizeWrap}>
-                <Text style={styles.propInfo}>{`${description.size}`}</Text>
-                <Text style={styles.propText}>Sq. m</Text>
-              </View>
-            </View>
+            }
 
             <Text style={styles.descriptionText}>{description.text}</Text>
             <Text style={{ marginTop: 20, fontWeight: "bold" }}>
-              Email: {contact_info.email}
+              Email: {contactInfo.email}
             </Text>
             <Text style={{ marginTop: 5, fontWeight: "bold" }}>
-              Phone: {contact_info.phone_number}
+              Phone: {contactInfo.phone_number}
             </Text>
           </View>
         </ScrollView>
