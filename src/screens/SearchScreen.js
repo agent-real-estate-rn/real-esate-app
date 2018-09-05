@@ -161,3 +161,9 @@ class SearchScreen extends Component {
     mapStateToProps,
     mapDispatchToSearchProps
   )(SearchScreen);
+//TODO
+/*
+  Fetch data to store, integrate data from store to map
+  try a fake one first
+  inetgrate listing and detail screen
+ */
