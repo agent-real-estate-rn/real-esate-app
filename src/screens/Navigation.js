@@ -6,11 +6,15 @@ import SignupScreen from './Signup';
 import SubscriptionScreen from './SubscriptionScreen';
 import PropertyDetailScreen from './PropertyDetailScreen';
 import SearchScreen from './SearchScreen';
+import ListView from './ListView';
 
 
 const SubscriptionStack = createStackNavigator({
   SubscriptionScreen: {
     screen: SubscriptionScreen
+  },
+  ListView: {
+    screen: ListView
   },
   PropertyDetailScreen: {
     screen: PropertyDetailScreen
@@ -24,6 +28,9 @@ const SubscriptionStack = createStackNavigator({
 const SearchStack = createStackNavigator({
   SearchScreen: {
     screen: SearchScreen
+  },
+  ListView: {
+    screen: ListView
   },
   PropertyDetailScreen: {
     screen: PropertyDetailScreen

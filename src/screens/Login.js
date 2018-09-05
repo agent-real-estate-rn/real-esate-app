@@ -11,8 +11,6 @@ import { connect } from "react-redux";
 import mapDispatchToLoginProps from "../actions/login";
 import loginStyle from "../style/login";
 
-
-
 class LoginScreen extends Component {
   constructor(props) {
     super(props);
@@ -27,8 +25,7 @@ class LoginScreen extends Component {
   }
 
   componentDidMount() {
-    this.props.loginAuto(this.props.navigation)
-
+    // this.props.loginAuto(this.props.navigation)
   }
 
   handleLoginEmail() {

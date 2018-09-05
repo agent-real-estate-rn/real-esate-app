@@ -22,6 +22,7 @@ export default class PropertyDetailScreen extends Component {
 
   render() {
     const { address, description, contactInfo } = TEST_DATA.propertyList[0];
+ 
     return (
       <View style={styles.componentContainer} onLayout={this.onLayout}>
         <ScrollView vertical>
