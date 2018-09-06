@@ -8,47 +8,47 @@ export default loginStyle = StyleSheet.create({
   wrap: {
     flex: 1,
     justifyContent: "center",
-    alignSelf: "center"
   },
   inputWrap: {
-    flex: 2,
-    justifyContent: "space-between"
+    padding: 15,
+    flex: 3,
+    justifyContent: "flex-start"
   },
-  inputInner: {
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 10,
-    backgroundColor: "#f7f7f7",
-    shadowColor: "#5f5f5f",
-    borderRadius: 10,
-    shadowOpacity: 0.8,
+  input: {
+    flex: 1,
+    padding: 20,
+    margin: 10,
+    marginBottom: 15,
+    borderRadius: 20,
+    backgroundColor: '#fff',
     shadowRadius: 2,
     shadowOffset: {
       height: 1,
       width: 0
-    }
-  },
-  input: {
-    width: 300,
-    padding: 10,
-    margin: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: "#ccc"
+    },
+    shadowColor: "#000",
+    shadowOpacity: 0.7
   },
   buttonWrap: {
-    paddingTop: 5
+    margin: 10
   },
   textWrap: {
-    flex: 1,
+    flex: 2,
     justifyContent: "center",
     alignItems: "center"
-  },
-  textInner: {
-    justifyContent: "center"
   },
   textTitle: {
     fontWeight: "bold",
     fontSize: 42,
     color: "#fff"
+  },
+  loginBtn: {
+    padding: 10,
+    alignItems: 'center',
+    backgroundColor: "#f7f7f7"
+  },
+  loginText: {
+    fontSize: 18,
+    color: "#223A5E"
   }
 });

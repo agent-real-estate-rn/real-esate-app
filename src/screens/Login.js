@@ -5,8 +5,9 @@ import {
   TextInput,
   Text,
   KeyboardAvoidingView,
-  ActivityIndicator
+  ActivityIndicator, StatusBar
 } from "react-native";
+import { SocialIcon } from 'react-native-elements';
 import { connect } from "react-redux";
 import mapDispatchToLoginProps from "../actions/login";
 import loginStyle from "../style/login";
@@ -44,6 +45,10 @@ class LoginScreen extends Component {
   render() {
     return (
       <View style={loginStyle.outer}>
+        <StatusBar
+          backgroundColor="blue"
+          barStyle="light-content"
+        />
         <View style={loginStyle.wrap}>
           <View style={loginStyle.textWrap}>
             <View style={loginStyle.textInner}>
@@ -63,8 +68,8 @@ class LoginScreen extends Component {
                 value={this.state.email}
                 multiline={false}
                 autoFocus={true}
-                underlineColorAndroid="#f7f7f7"
-                placeholder= "Enter your email..."
+                underlineColorAndroid="#fff"
+                placeholder= "Email"
                 textContentType="username"
               />
               <TextInput
@@ -72,16 +77,27 @@ class LoginScreen extends Component {
                 multiline={false}
                 onChangeText={password => this.setState({ password })}
                 secureTextEntry={true}
-                underlineColorAndroid="#f7f7f7"
-                placeholder="Enter your password..."
+                underlineColorAndroid="#fff"
+                placeholder="Password"
                 textContentType="password"
               />
               <View style={loginStyle.buttonWrap}>
-                <Button title="Login" onPress={this.handleLoginEmail}/>
+                <Button 
+                  title="Login" 
+                  color="#fff"
+                  onPress={this.handleLoginEmail}
+                  style={loginStyle.loginBtn}/>
               </View>
-              <Button title="LoginFB" onPress={this.handleLoginFB} />
+              <View style={loginStyle.buttonWrap}>
+                <SocialIcon
+                  title='Sign In With Facebook'
+                  button
+                  onPress={this.handleLoginFB}
+                  type='facebook'
+                />
+              </View>
             </View>
-            <Button title="Signup" onPress={this.goToSignup} />
+            <Button title="Don't have an account?" onPress={this.goToSignup} color="#fff"/>
           </View>
         </View>
         <KeyboardAvoidingView behavior="padding" enabled />
