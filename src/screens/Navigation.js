@@ -42,18 +42,18 @@ const SearchStack = createStackNavigator({
 });
 
 const Tabs = createBottomTabNavigator({
+  SearchStack: {
+    screen: SearchStack,
+    navigationOptions: {
+      tabBarLabel: 'Search',
+      tabBarIcon: ({tintColor}) =>( <Icon name='search' type='material_community' color={tintColor} />)
+    }
+  },
   SubscriptionStack: {
     screen: SubscriptionStack,
     navigationOptions: {
       tabBarLabel: 'Conversation',
       tabBarIcon: ({tintColor}) =>( <Icon name='chat' type='material_community' color={tintColor} />)
-    }
-  },
-  SearchStack: {
-    screen: SearchStack,
-    navigationOptions: {
-      tabBarLabel: 'Search',
-      tabBarIcon: ({tintColor}) =>( <Icon name='person-outline' type='material_community' color={tintColor} />)
     }
   }
 }, {
@@ -62,17 +62,17 @@ const Tabs = createBottomTabNavigator({
 });
 
 const MainStack = createSwitchNavigator({
-  LoginScreen: {
-    screen: LoginScreen
-  },
-  SignupScreen: {
-    screen: SignupScreen
-  },
+  // LoginScreen: {
+  //   screen: LoginScreen
+  // },
+  // SignupScreen: {
+  //   screen: SignupScreen
+  // },
   Tabs: {
     screen: Tabs
   }
 }, {
-  initialRouteName: 'LoginScreen',
+  initialRouteName: 'Tabs',
   headerMode: 'none',
   navigationOptions: {
     headerVisible: false,

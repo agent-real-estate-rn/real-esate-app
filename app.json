@@ -1,5 +1,13 @@
 {
   "expo": {
     "sdkVersion": "27.0.0"
+  },
+  "android": {
+    "permissions": [
+      "CAMERA",
+      "READ_INTERNAL_STORAGE",
+      "READ_EXTERNAL_STORAGE",
+      "WRITE_EXTERNAL_STORAGE"
+    ]
   }
 }
