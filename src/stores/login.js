@@ -6,9 +6,7 @@ export default login = (state= initialState, action) => {
       return {...state, isLoading: true};
     }
     case 'LOGIN_SUCCESS': {
-      // return state;
-      console.log('this is the state: ', state);
-      
+
       return {...state, isLoading: false, uid: action.uid, userInfo: action.userInfo};
     }
     default:
