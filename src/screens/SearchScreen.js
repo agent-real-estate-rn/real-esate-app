@@ -9,7 +9,6 @@ import { Icon } from 'react-native-elements';
 import mapDispatchToSearchProps from '../actions/search';
 import Loading from '../Components/Loading';
 
-
 class SearchScreen extends Component {
   constructor(props) {
     super(props);
@@ -28,16 +27,18 @@ class SearchScreen extends Component {
     };
     this.getCurrentLocation = this.getCurrentLocation.bind(this);
     this.toggleDrawOnMap = this.toggleDrawOnMap.bind(this);
-    this.filterMarker = this.filterMarker.bind(this);
+    this.getPolygonAndMarkers = this.getPolygonAndMarkers.bind(this);
     this.map;
-    this.drawPolygon = _.throttle(this.drawPolygon, 140);
+    this.drawPolyline = _.throttle(this.drawPolyline, 140);
+  }
+  componentDidMount() {
+    this.props.getInitialData();
   }
 
   getCurrentLocation() {
     try {
       navigator.geolocation.getCurrentPosition(
         (position) => {
-          console.log(position);
           const region = {
             latitude: position.coords.latitude,
             longitude: position.coords.longitude,
@@ -60,35 +61,44 @@ class SearchScreen extends Component {
   }
 
   toggleDrawOnMap() {
+    // markers = this.props.propertyList.map(item => {
+    //   return item.coordinates;
+    // });
+    // this.setState({
+    //   markers: markers
+    // });
     this.setState({
       isDrawing: !this.state.isDrawing,
       panDrag: [],
-      polygon: []
+      polygon: [],
+      markers: []
     });
   }
 
-  filterMarker() {
-    let getMarker = this.state.markers.filter(marker => {
-      if (geolib.isPointInside(marker.coordinate, this.state.panDrag)) {
-        return marker;
+  getPolygonAndMarkers() {
+    const listCoordinates = this.props.propertyList;
+
+    let polygonArr = this.state.panDrag.concat(this.state.panDrag[0]);
+    let markerInPolygon = listCoordinates.filter(item => {
+      if (geolib.isPointInside(item.coordinates, polygonArr)) {
+        return item;
       }
     });
-    let list = this.state.panDrag.concat(this.state.panDrag[0]);
     this.setState({
-      markers: getMarker,
-      polygon: list,
-      panDrag: [],
-      isDrawing: !this.state.isDrawing
+      isDrawing: !this.state.isDrawing,
+      markers: markerInPolygon,
+      polygon: polygonArr,
+      panDrag: []
     });
   }
 
   panDragMap(e) {
     if (this.state.isDrawing) {
-      this.drawPolygon(e.nativeEvent.coordinate);
+      this.drawPolyline(e.nativeEvent.coordinate);
     }
   }
 
-  drawPolygon(coordinate) {
+  drawPolyline(coordinate) {
     let newArray = [...this.state.panDrag, { ...coordinate
     }];
     this.setState({
@@ -110,15 +120,19 @@ class SearchScreen extends Component {
         >
           {this.state.markers.map((marker, key) => (
               <MapView.Marker key = {key}
-                coordinate = {marker.coordinate}
+                coordinate = {marker.coordinates}
               >
               </MapView.Marker>
           ))}
           {(this.state.panDrag.length > 0) &&
             (<MapView.Polyline coordinates = {this.state.panDrag}
-              fillColor = 'rgba(25, 25, 112, 0.6)'
+              strokeWidth = {2}/>
+            )
+          }
+          {(this.state.polygon.length > 0) &&
+            (<MapView.Polygon coordinates = {this.state.polygon}
               strokeWidth = {2}
-              miterLimit = {30}/>)
+            />)
           }
           </MapView>
         <TouchableOpacity
@@ -133,12 +147,12 @@ class SearchScreen extends Component {
           <TouchableOpacity
             activeOpacity={0.8}
             style = {[styles.absoluteBtn, styles.doneBtn]}
-            onPress = {this.getCurrentLocation}
+            onPress = {this.getPolygonAndMarkers}
           ><Icon name ='done-all' type = 'material_community' containerStyle = {styles.icon}/>
           </TouchableOpacity>
         }
         {
-          this.state.polygon.length > 3 && this.state.isDrawing &&
+          this.state.polygon.length > 0  &&
           <TouchableOpacity
             activeOpacity={0.8}
             style = {[styles.absoluteBtn, styles.getListBtn]}
@@ -153,8 +167,7 @@ class SearchScreen extends Component {
   }
 
   const mapStateToProps = function (state) {
-    return { ...state.searchOnMap
-    };
+    return { ...state.searchOnMap};
   };
 
   export default connect(
