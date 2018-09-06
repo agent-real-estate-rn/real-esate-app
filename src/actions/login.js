@@ -13,16 +13,16 @@ export default function mapDispatchToLoginProps(dispatch) {
       const { type, token } = await Expo.Facebook.logInWithReadPermissionsAsync('1952254625024149', {
         permissions: ['public_profile'],
       });
-      
+
       if (type === 'success') {
         // Get the user's name using Facebook's Graph API
-        const response = await fetch(
-          `https://graph.facebook.com/me?access_token=${token}`);
-        const data = await response.json();
-        console.log('this is response data: ', data);
+        // const response = await fetch(
+        //   `https://graph.facebook.com/me?access_token=${token}`);
+        // const data = await response.json();
+        // console.log('this is response data: ', data);
 
         let credential = firebase.auth.FacebookAuthProvider.credential(token);
-        console.log('this is credential: ', credential)
+        // console.log('this is credential: ', credential)
         firebase.auth().signInAndRetrieveDataWithCredential(credential).catch((error) => {
           console.log(err);
         });
@@ -40,7 +40,6 @@ export default function mapDispatchToLoginProps(dispatch) {
     loginAuto: (navigation) => {
 
       firebase.auth().onAuthStateChanged((user) => {
-        console.log('this is autologin user: ', user);
         const data = user;
         dispatch({
           type: 'LOGIN_SUCCESS',
@@ -59,8 +58,7 @@ export default function mapDispatchToLoginProps(dispatch) {
 }
 
 const loginBusiness = (dispatch) => (username, password, navigation) => {
-  console.log('this is password: ', password);
-  
+
     try {
       firebase
         .auth()
@@ -76,5 +74,3 @@ const loginBusiness = (dispatch) => (username, password, navigation) => {
       console.log(error.toString());
     }
 }
-
-// example of action.

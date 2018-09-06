@@ -4,13 +4,14 @@ import {
   View,
   TextInput,
   Text,
-  KeyboardAvoidingView,
+  KeyboardAvoidingView, TouchableOpacity,
   ActivityIndicator, StatusBar
 } from "react-native";
 import { SocialIcon } from 'react-native-elements';
 import { connect } from "react-redux";
 import mapDispatchToLoginProps from "../actions/login";
 import loginStyle from "../style/login";
+import FloatingLabelInput from '../Components/FloatingInput';
 
 class LoginScreen extends Component {
   constructor(props) {
@@ -38,7 +39,6 @@ class LoginScreen extends Component {
   }
 
   goToSignup() {
-    console.log(this.props);
     this.props.navigation.navigate("SignupScreen");
   }
 
@@ -62,42 +62,58 @@ class LoginScreen extends Component {
           </View>
           <View style={loginStyle.inputWrap}>
             <View style={loginStyle.inputInner}>
-              <TextInput
+              {/* <TextInput
                 style={loginStyle.input}
                 onChangeText={email => this.setState({ email })}
                 value={this.state.email}
                 multiline={false}
+                placeholderTextColor="#cccccc"
                 autoFocus={true}
-                underlineColorAndroid="#fff"
-                placeholder= "Email"
+                underlineColorAndroid="transparent"
+                placeholderText= "Email"
                 textContentType="username"
+              /> */}
+              <FloatingLabelInput
+                style={loginStyle.input}
+                label="Email"
+                multiline={false}
+                value={this.state.email}
+                textContentType='emailAddress'
+                onChangeText={email => this.setState({ email })}
               />
-              <TextInput
+              <FloatingLabelInput
                 style={loginStyle.input}
                 multiline={false}
+                label="Password"
+                value={this.state.password}
                 onChangeText={password => this.setState({ password })}
-                secureTextEntry={true}
-                underlineColorAndroid="#fff"
-                placeholder="Password"
+                textContentType='password'
+                secureTextEntry
+                underlineColorAndroid="transparent"
                 textContentType="password"
               />
-              <View style={loginStyle.buttonWrap}>
-                <Button 
-                  title="Login" 
-                  color="#fff"
+              <TouchableOpacity
+                style={[loginStyle.buttonWrap, loginStyle.loginBtn]}
+                onPress={this.handleLoginEmail}
+              >
+                <Text
+                  style={{color: "#223A5E", textAlign: 'center'}}
                   onPress={this.handleLoginEmail}
-                  style={loginStyle.loginBtn}/>
-              </View>
+                 >Login</Text>
+              </TouchableOpacity>
               <View style={loginStyle.buttonWrap}>
                 <SocialIcon
                   title='Sign In With Facebook'
                   button
                   onPress={this.handleLoginFB}
                   type='facebook'
+                  style={{marginLeft: 0, marginRight: 0}}
                 />
               </View>
             </View>
-            <Button title="Don't have an account?" onPress={this.goToSignup} color="#fff"/>
+            <TouchableOpacity style={loginStyle.buttonWrap} onPress={this.goToSignup}>
+              <Text style={{color: "#fff", textAlign: 'center'}}>Don't have an account?</Text>
+            </TouchableOpacity>
           </View>
         </View>
         <KeyboardAvoidingView behavior="padding" enabled />
