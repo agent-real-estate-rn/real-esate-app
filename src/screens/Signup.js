@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { StatusBar, Button, View, TextInput, Text, KeyboardAvoidingView } from 'react-native';
+import { StatusBar, Button, View, TextInput, Text, KeyboardAvoidingView, TouchableOpacity } from 'react-native';
 import loginStyle from '../style/login';
 import firebase from '../firebase'
 import { SocialIcon } from 'react-native-elements';
+import FloatingLabelInput from '../Components/FloatingInput';
 
 export default class SignupScreen extends Component {
   constructor(props) {
@@ -37,10 +38,10 @@ export default class SignupScreen extends Component {
   render() {
     return (
       <View style={loginStyle.outer}>
-      <StatusBar
-          backgroundColor="blue"
-          barStyle="light-content"
-        />
+        <StatusBar
+            backgroundColor="blue"
+            barStyle="light-content"
+          />
         <View style={loginStyle.wrap}>
           <View style={loginStyle.textWrap}>
             <View style={loginStyle.textInner}>
@@ -50,26 +51,35 @@ export default class SignupScreen extends Component {
           </View>
           <View style={loginStyle.inputWrap}>
             <View style={loginStyle.inputInner}>
-              <TextInput
+            <FloatingLabelInput
                 style={loginStyle.input}
-                onChangeText={(email) => this.setState({email})}
-                value={this.state.name}
+                label="Email"
                 multiline={false}
-                autoFocus={true}
-                underlineColorAndroid="#f7f7f7"
-                placeholder='Enter your email...'
-                textContentType='username'
+                value={this.state.email}
+                textContentType='emailAddress'
+                onChangeText={email => this.setState({ email })}
               />
-              <TextInput style={loginStyle.input}
+              <FloatingLabelInput
+                style={loginStyle.input}
                 multiline={false}
-                onChangeText={(password) => this.setState({password})}
-                secureTextEntry={true}
-                underlineColorAndroid="#f7f7f7"
-                placeholder='Enter your password...'
+                label="Password"
+                value={this.state.password}
+                onChangeText={password => this.setState({ password })}
                 textContentType='password'
+                secureTextEntry
+                underlineColorAndroid="transparent"
+                textContentType="password"
               />
-              <View style={loginStyle.buttonWrap}>
-                <Button title='Sign up' onPress={this.handleClick} color="#fff"/>
+              <TouchableOpacity
+                style={[loginStyle.buttonWrap, loginStyle.loginBtn]}
+                onPress={this.handleClick}
+              >
+                <Text
+                  title='Sign up'
+                  style={{color: "#223A5E", textAlign: 'center'}}
+                >Sign up
+                </Text>
+              </TouchableOpacity>
               </View>
               <View style={loginStyle.buttonWrap}>
                 <SocialIcon
@@ -77,12 +87,14 @@ export default class SignupScreen extends Component {
                     button
                     onPress={this.handleLoginFB}
                     type='facebook'
+                    style={{marginLeft: 0, marginRight: 0}}
                   />
               </View>
+              <TouchableOpacity style={loginStyle.buttonWrap} onPress={this.goToLogin} >
+                <Text style={{color: "#fff", textAlign: 'center'}}>Already have an account?</Text>
+              </TouchableOpacity>
             </View>
-            <Button title='Already have an account?' onPress={this.goToLogin} color="#fff"/>
           </View>
-        </View>
         <KeyboardAvoidingView behavior="padding" enabled></KeyboardAvoidingView>
       </View>
     )

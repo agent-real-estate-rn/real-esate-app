@@ -17,20 +17,19 @@ export default loginStyle = StyleSheet.create({
   input: {
     flex: 1,
     padding: 20,
-    margin: 10,
-    marginBottom: 15,
-    borderRadius: 20,
-    backgroundColor: '#fff',
-    shadowRadius: 2,
-    shadowOffset: {
-      height: 1,
-      width: 0
-    },
-    shadowColor: "#000",
-    shadowOpacity: 0.7
+    paddingTop: 35,
+    marginLeft: 10,
+    marginRight: 10,
+    marginTop: 10,
+    marginBottom: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: "#f7f7f7"
   },
   buttonWrap: {
-    margin: 10
+    marginTop: 5,
+    marginBottom: 5,
+    marginLeft: 10,
+    marginRight: 10
   },
   textWrap: {
     flex: 2,
@@ -43,9 +42,10 @@ export default loginStyle = StyleSheet.create({
     color: "#fff"
   },
   loginBtn: {
-    padding: 10,
+    backgroundColor: '#f7f7f7',
     alignItems: 'center',
-    backgroundColor: "#f7f7f7"
+    padding: 15,
+    borderRadius: 30
   },
   loginText: {
     fontSize: 18,

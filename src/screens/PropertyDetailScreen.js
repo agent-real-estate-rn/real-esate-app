@@ -16,13 +16,12 @@ export default class PropertyDetailScreen extends Component {
 
   onLayout() {
     this.setState({ screen: Dimensions.get("window") });
-    console.log('this is onLayout screen dimensions ', this.state.screen);
-    
+
   }
 
   render() {
     const { address, description, contactInfo } = TEST_DATA.propertyList[0];
- 
+
     return (
       <View style={styles.componentContainer} onLayout={this.onLayout}>
         <ScrollView vertical>
