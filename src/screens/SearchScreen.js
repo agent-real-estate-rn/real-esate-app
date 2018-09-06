@@ -67,6 +67,7 @@ class SearchScreen extends Component {
     // this.setState({
     //   markers: markers
     // });
+    this.props.resetPropertyList();
     this.setState({
       isDrawing: !this.state.isDrawing,
       panDrag: [],
@@ -76,17 +77,12 @@ class SearchScreen extends Component {
   }
 
   getPolygonAndMarkers() {
-    const listCoordinates = this.props.propertyList;
-
     let polygonArr = this.state.panDrag.concat(this.state.panDrag[0]);
-    let markerInPolygon = listCoordinates.filter(item => {
-      if (geolib.isPointInside(item.coordinates, polygonArr)) {
-        return item;
-      }
-    });
+    this.props.getFilteredPropertiesList(this.props.propertyList, polygonArr);
+
     this.setState({
       isDrawing: !this.state.isDrawing,
-      markers: markerInPolygon,
+      markers: this.props.filteredPropertiesList,
       polygon: polygonArr,
       panDrag: []
     });
@@ -118,7 +114,7 @@ class SearchScreen extends Component {
           onPanDrag = {e => this.panDragMap(e)}
           ref={(map) => this.map = map}
         >
-          {this.state.markers.map((marker, key) => (
+          {this.props.filteredPropertiesList.map((marker, key) => (
               <MapView.Marker key = {key}
                 coordinate = {marker.coordinates}
               >
@@ -160,7 +156,7 @@ class SearchScreen extends Component {
           ><Text>Get properties list!</Text>
           </TouchableOpacity>
         }
-        {this.state.loading && <Loading/>}
+        {this.props.loading && <Loading/>}
       </View>
       )
     }
