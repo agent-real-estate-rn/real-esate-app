@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { StyleSheet, Button, View, TextInput, Text, KeyboardAvoidingView } from 'react-native';
+import { StatusBar, Button, View, TextInput, Text, KeyboardAvoidingView } from 'react-native';
 import loginStyle from '../style/login';
 import firebase from '../firebase'
+import { SocialIcon } from 'react-native-elements';
 
 export default class SignupScreen extends Component {
   constructor(props) {
@@ -36,10 +37,14 @@ export default class SignupScreen extends Component {
   render() {
     return (
       <View style={loginStyle.outer}>
+      <StatusBar
+          backgroundColor="blue"
+          barStyle="light-content"
+        />
         <View style={loginStyle.wrap}>
           <View style={loginStyle.textWrap}>
             <View style={loginStyle.textInner}>
-              <Text style={loginStyle.textTitle}>Sign up screen</Text>
+              <Text style={loginStyle.textTitle}>Sign up</Text>
               {this.props.name ? (<Text>Welcome </Text>) :(<Text > </Text>)}
             </View>
           </View>
@@ -64,10 +69,18 @@ export default class SignupScreen extends Component {
                 textContentType='password'
               />
               <View style={loginStyle.buttonWrap}>
-                <Button title='Sign up' onPress={this.handleClick} />
+                <Button title='Sign up' onPress={this.handleClick} color="#fff"/>
+              </View>
+              <View style={loginStyle.buttonWrap}>
+                <SocialIcon
+                    title='Sign In With Facebook'
+                    button
+                    onPress={this.handleLoginFB}
+                    type='facebook'
+                  />
               </View>
             </View>
-            <Button title='Login' onPress={this.goToLogin} />
+            <Button title='Already have an account?' onPress={this.goToLogin} color="#fff"/>
           </View>
         </View>
         <KeyboardAvoidingView behavior="padding" enabled></KeyboardAvoidingView>
