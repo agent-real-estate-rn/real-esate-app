@@ -1,20 +1,14 @@
 
 const initialState = {
-  initialLocation: {
-    latitude: 10.7777045,
-    longitude: 106.6858056,
-    latitudeDelta:  0.0922,
-    longitudeDelta: 0.0421
-  },
-  polygonArr: [],
-  markerArr: []
+  initialLocation: {},
+  propertyList: []
 };
 
-export default searchOnMap = (state= {}, action) => {
+export default searchOnMap = (state = initialState, action) => {
   switch (action.type) {
-    case 'INITAL_MAP': {
-      return {...state, initialLocation: action.coordinate};
-    }
+    case 'INITIAL_MAP': {
+      return {initialLocation: action.initialRegion, propertyList: action.propertyList};
+    };
     default: return state;
   }
 }

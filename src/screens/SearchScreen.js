@@ -14,8 +14,8 @@ class SearchScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      loading: false,
       location: {
-        loading: false,
         latitude: 10.7623717,
         longitude: 106.7061763,
         latitudeDelta: 0.04292,
@@ -101,7 +101,7 @@ class SearchScreen extends Component {
       <View style = {styles.wrapScreen}>
         <MapView
           style = {{flex: 1, marginBottom: 0}}
-          initialRegion={this.state.location} 
+          initialRegion={this.state.location}
           showsUserLocation = {true}
           showsMyLocationButton = {true}
           scrollEnabled = {!this.state.isDrawing}
@@ -138,7 +138,7 @@ class SearchScreen extends Component {
           </TouchableOpacity>
         }
         {
-          this.state.polygon.length > 3 && this.state.isDrawing && 
+          this.state.polygon.length > 3 && this.state.isDrawing &&
           <TouchableOpacity
             activeOpacity={0.8}
             style = {[styles.absoluteBtn, styles.getListBtn]}
