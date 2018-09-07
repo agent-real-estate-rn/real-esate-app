@@ -33,6 +33,7 @@ export default styles = StyleSheet.create({
     paddingTop: 18
   },
   getListBtn: {
+    backgroundColor: '#223A5E',
     alignItems: 'center',
     justifyContent: 'center',
     alignSelf: 'center',

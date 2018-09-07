@@ -27,7 +27,7 @@ class LoginScreen extends Component {
   }
 
   componentDidMount() {
-    // this.props.loginAuto(this.props.navigation)
+    this.props.loginAuto(this.props.navigation)
   }
 
   handleLoginEmail() {
@@ -62,17 +62,6 @@ class LoginScreen extends Component {
           </View>
           <View style={loginStyle.inputWrap}>
             <View style={loginStyle.inputInner}>
-              {/* <TextInput
-                style={loginStyle.input}
-                onChangeText={email => this.setState({ email })}
-                value={this.state.email}
-                multiline={false}
-                placeholderTextColor="#cccccc"
-                autoFocus={true}
-                underlineColorAndroid="transparent"
-                placeholderText= "Email"
-                textContentType="username"
-              /> */}
               <FloatingLabelInput
                 style={loginStyle.input}
                 label="Email"

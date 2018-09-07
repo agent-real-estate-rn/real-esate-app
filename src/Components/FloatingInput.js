@@ -62,6 +62,6 @@ export default class FloatingLabelInput extends Component {
           onSubmitEditing={() => this.refs['text_input'].blur()}
         />
       </View>
-    );
+    )
   }
 }
