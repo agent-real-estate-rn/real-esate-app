@@ -21,7 +21,7 @@ const SubscriptionStack = createStackNavigator({
   }
 }, {
   navigationOptions: {
-    title: 'My Subscription'
+    title: 'My Subscriptions'
   }
 });
 
@@ -52,7 +52,7 @@ const Tabs = createBottomTabNavigator({
   SubscriptionStack: {
     screen: SubscriptionStack,
     navigationOptions: {
-      tabBarLabel: 'Conversation',
+      tabBarLabel: 'Subscriptions',
       tabBarIcon: ({tintColor}) =>( <Icon name='chat' type='material_community' color={tintColor} />)
     }
   }

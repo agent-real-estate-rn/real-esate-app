@@ -1,18 +1,30 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, Button } from 'react-native';
 import styles from '../style/searchscreen';
 import { connect } from "react-redux";
 import MapView from 'react-native-maps';
 import geolib from 'geolib';
 import _ from 'lodash';
-import { Icon } from 'react-native-elements';
+import { Icon, SearchBar } from 'react-native-elements';
 import mapDispatchToSearchProps from '../actions/search';
 import Loading from '../Components/Loading';
+import ListView from './ListView';
 
 class SearchScreen extends Component {
+  static navigationOptions = {
+    title: 'Search',
+    header: ({params}) => {
+      right:
+      <Button
+      title = "Test"
+      onPress = {() => console.log('button pressed')
+       } />
+    }
+  }
   constructor(props) {
     super(props);
     this.state = {
+      mapView: true,
       loading: false,
       location: {
         latitude: 10.7623717,
@@ -105,6 +117,11 @@ class SearchScreen extends Component {
   render() {
     return (
       <View style = {styles.wrapScreen}>
+        <View style={{marginTop:60, marginLeft:10, flexDirection:'row'}} >
+          <SearchBar lightTheme clearIcon containerStyle={{width: 270}}  />
+          <View style={{marginLeft: 20}}><Button title={this.state.mapView ? 'List' : 'Map'} onPress={()=>this.setState({mapView: !this.state.mapView})}/>></View>
+        </View>
+      { !this.state.mapView ? <ListView filteredPropertiesList = {this.props.filteredPropertiesList} navigation={this.props.navigation}/> :
         <MapView
           style = {{flex: 1, marginBottom: 0}}
           initialRegion={this.state.location}
@@ -130,14 +147,15 @@ class SearchScreen extends Component {
               strokeWidth = {2}
             />)
           }
-          </MapView>
+      </MapView> }
+      { !this.state.mapView ? null :
         <TouchableOpacity
           activeOpacity={0.8}
           style = {[styles.absoluteBtn, styles.drawButton]}
           onPress = {this.toggleDrawOnMap}
         >
           <Icon name ={!this.state.isDrawing ? 'brush' : 'highlight-off'} type = 'material_community' containerStyle = {styles.icon}/>
-        </TouchableOpacity>
+      </TouchableOpacity> }
         {
           this.state.isDrawing && this.state.panDrag.length > 3 &&
           <TouchableOpacity

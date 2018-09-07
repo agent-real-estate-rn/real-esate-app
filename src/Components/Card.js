@@ -17,7 +17,7 @@ export default class Card extends Component {
   render() {
     let screenWidth = this.state.screen.width - 30;
     return (
-      <TouchableOpacity onPress={()=> console.log('take me to PropertyDetailScreen')} style={styles.card}>
+      <TouchableOpacity onPress={()=> this.props.navigation.navigate('PropertyDetailScreen', this.props)} style={styles.card}>
         <Image
           style={{width: screenWidth, height: (screenWidth * 9 / 16)}}
           source={{ uri: this.props.imgUrl[0] }}

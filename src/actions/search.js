@@ -13,10 +13,7 @@ export default function mapDispatchToSearchProps(dispatch, ownprops) {
         longitudeDelta: 0.03021
       }
       const coordinatesList = data.propertyList.map(item => {
-        return {
-          id: item.id,
-          coordinates: item.coordinates
-        }
+        return { ...item }
       });
       dispatch({
         type: 'INITIAL_MAP',

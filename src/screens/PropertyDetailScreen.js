@@ -20,14 +20,14 @@ export default class PropertyDetailScreen extends Component {
   }
 
   render() {
-    const { address, description, contactInfo } = TEST_DATA.propertyList[0];
+    const { address, description, contactInfo, imgUrl } = this.props.navigation.state.params;
 
     return (
       <View style={styles.componentContainer} onLayout={this.onLayout}>
         <ScrollView vertical>
           <View style={styles.wrapCarousel}>
             <Carousel
-              images={TEST_DATA.propertyList[0].imgUrl}
+              images={imgUrl}
               imageStyle={{
                 width: this.state.screen.width,
                 height: (this.state.screen.width * 9) / 16
