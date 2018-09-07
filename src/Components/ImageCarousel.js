@@ -47,13 +47,13 @@ export default class Carousel extends React.Component {
               inputRange: [i - 1, i, i + 1],
               outputRange: [0.3, 1, 0.3],
               extrapolate: "clamp"
-            });
+            })
             return (
               <Animated.View key={i} style={{ opacity, height: 10, width: 10, backgroundColor: "#595959", margin: 8, borderRadius: 5 }} />
-            );
+            )
           })}
         </View>
       </View>
-    );
+    )
   }
 }
