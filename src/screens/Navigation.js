@@ -7,6 +7,7 @@ import SubscriptionScreen from './SubscriptionScreen';
 import PropertyDetailScreen from './PropertyDetailScreen';
 import SearchScreen from './SearchScreen';
 import ListView from './ListView';
+import SplashScreen from './SplashScreen';
 
 
 const SubscriptionStack = createStackNavigator({
@@ -62,17 +63,20 @@ const Tabs = createBottomTabNavigator({
 });
 
 const MainStack = createSwitchNavigator({
-  // LoginScreen: {
-  //   screen: LoginScreen
-  // },
-  // SignupScreen: {
-  //   screen: SignupScreen
-  // },
+  LoginScreen: {
+    screen: LoginScreen
+  },
+  SplashScreen: {
+    screen: SplashScreen
+  },
+  SignupScreen: {
+    screen: SignupScreen
+  },
   Tabs: {
     screen: Tabs
   }
 }, {
-  initialRouteName: 'Tabs',
+  initialRouteName: 'SplashScreen',
   headerMode: 'none',
   navigationOptions: {
     headerVisible: false,

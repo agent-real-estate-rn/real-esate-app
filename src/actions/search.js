@@ -39,6 +39,26 @@ export default function mapDispatchToSearchProps(dispatch, ownprops) {
       dispatch({
         type: 'RESET_PROPERTY_LIST'
       });
+    },
+    getSnapshot: (uri) => {
+      dispatch({
+        type: 'GET_SNAPSHOT',
+        uri
+      });
     }
   }
+}
+
+const uploadImageAsync = async (uuid, uri) => {
+  const ref = firebase.storage().ref().child(uuid);
+  const response = await fetch(uri);
+  const blob = await response.blob();
+
+  const snapshot = await ref.put(blob);
+  return snapshot.downloadURL;
+  
+};
+const saveSubscription = (uuid, info) => {
+  const ref = firebase.database().ref('subscription/').child(uuid);
+
 }

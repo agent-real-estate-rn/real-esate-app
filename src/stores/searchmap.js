@@ -3,7 +3,8 @@ const initialState = {
   loading: false,
   initialLocation: {},
   propertyList: [],
-  filteredPropertiesList: []
+  filteredPropertiesList: [],
+  snapshotUri: ''
 };
 
 export default searchOnMap = (state = initialState, action) => {
@@ -19,6 +20,9 @@ export default searchOnMap = (state = initialState, action) => {
     };
     case 'RESET_PROPERTY_LIST': {
       return {...state, filteredPropertiesList: []};
+    };
+    case 'GET_SNAPSHOT': {
+      return {...state, snapshotUri: action.uri};
     };
     default: return state;
   }

@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import {
-  Button,
   View,
-  TextInput,
   Text,
   KeyboardAvoidingView, TouchableOpacity,
   ActivityIndicator, StatusBar
@@ -27,11 +25,11 @@ class LoginScreen extends Component {
   }
 
   componentDidMount() {
-    this.props.loginAuto(this.props.navigation)
+    // this.props.loginAuto()
   }
 
   handleLoginEmail() {
-    this.props.loginByUsernamePassword(this.state.email, this.state.password, this.props.navigation, );
+    this.props.loginByUsernamePassword(this.state.email, this.state.password);
   }
 
   handleLoginFB() {
@@ -112,7 +110,7 @@ class LoginScreen extends Component {
 }
 
 const mapStateToProps = function(state) {
-  return { ...state };
+  return { ...state.login };
 };
 
 export default connect(

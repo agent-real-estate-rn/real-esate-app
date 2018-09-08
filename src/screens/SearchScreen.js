@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Button, Animated, TouchableOpacity, Easing, StyleSheet } from 'react-native';
-// import styles from '../style/searchscreen';
-import { connect } from "react-redux";
-import mapDispatchToSearchProps from '../actions/search';
+import { Text, TouchableOpacity, Easing, StyleSheet } from 'react-native';
 import ListView from './ListView';
 import MapSearch from '../Components/MapSearch';
 import FlipView from 'react-native-flip-view-next';

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { Text, View, ScrollView, Image, StyleSheet, Dimensions, StatusBar, Animated } from "react-native";
-import TEST_DATA from "../listingArray.json";
+import { Text, View, ScrollView, Dimensions } from "react-native";
+// import TEST_DATA from "../listingArray.json";
 import styles from '../style/propertyDetailStyle';
 import Carousel from '../Components/ImageCarousel';
 

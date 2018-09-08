@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import MapView from "react-native-maps";
 import geolib from "geolib";
 import _ from "lodash";
+import Expo from 'expo';
 import { Icon, SearchBar } from "react-native-elements";
 import mapDispatchToSearchProps from "../actions/search";
 import Loading from "./Loading";
@@ -21,6 +22,7 @@ class MapSearch extends Component {
         latitudeDelta: 0.04292,
         longitudeDelta: 0.03021
       },
+      onMapRegion: {},
       markers: [],
       panDrag: [],
       polygon: [],
@@ -30,7 +32,8 @@ class MapSearch extends Component {
     this.getCurrentLocation = this.getCurrentLocation.bind(this);
     this.toggleDrawOnMap = this.toggleDrawOnMap.bind(this);
     this.getPolygonAndMarkers = this.getPolygonAndMarkers.bind(this);
-    this.drawPolyline = _.throttle(this.drawPolyline, 120);
+    this.drawPolyline = _.throttle(this.drawPolyline, 1000/60);
+    this.regionChangeComplete = this.regionChangeComplete.bind(this);
   }
   componentDidMount() {
     this.props.getInitialData();
@@ -106,21 +109,36 @@ class MapSearch extends Component {
       panDrag: newArray
     });
   }
+
+  regionChangeComplete(region) {
+    this.setState({onMapRegion: {...region}});
+  }
+
+  getSnapShot() {
+    console.log(this.props);
+    // console.log(this.map);
+    // const snapshot = await Expo.takeSnapshotAsync(this.map,{
+    //   result: 'file',
+    //   format: 'jpeg'
+    // });
+    // snapshot.then((uri) => {
+    //   console.log(uri);
+    //   // this.props.getSnapshot(this.props.uuid, uri);
+    // });
+  }
+
   render() {
     return (
       <View style = {[{flex: 1, position: 'relative', opacity: 1}]}>
-        {/* <View style={{marginTop:60, marginLeft:10, flexDirection:'row'}} >
-            <SearchBar lightTheme clearIcon containerStyle={{width: 270}}  />
-            <View style={{marginLeft: 20}}><Button title={this.state.mapView ? 'List' : 'Map'} onPress={()=>this.setState({mapView: !this.state.mapView})}/></View>
-          </View> */}
         <MapView
           style = {{flex: 1}}
           initialRegion={this.state.location}
           showsUserLocation = {true}
-          showsMyLocationButton = {true}
+          showsMyLocationButton = {true} 
           scrollEnabled = {!this.state.isDrawing}
           onPanDrag = {e => this.panDragMap(e)}
           ref={(map) => this.map = map}
+          onRegionChangeComplete={this.regionChangeComplete}
         >
           {this.props.filteredPropertiesList.map((marker, key) => (
               <MapView.Marker key = {key}
@@ -162,8 +180,8 @@ class MapSearch extends Component {
           <TouchableOpacity
             activeOpacity={0.8}
             style = {[styles.absoluteBtn, styles.getListBtn]}
-            onPress = {() => this.props.toggleMap()}
-          ><Text style={{color: '#fff'}}>Get properties list!</Text>
+            onPress = {() => this.getSnapShot()}
+          ><Text style={{color: '#fff'}}>Get snapshot!</Text>
           </TouchableOpacity>
         }
         {this.props.loading && <Loading/>}
@@ -172,7 +190,10 @@ class MapSearch extends Component {
   }
 }
 const mapStateToProps = function (state) {
-  return { ...state.searchOnMap};
+  return {
+    ...state.searchOnMap,
+    uuid: state.login.uuid
+  };
 };
 
 export default connect(

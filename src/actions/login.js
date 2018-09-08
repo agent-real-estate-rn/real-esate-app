@@ -1,12 +1,12 @@
 import firebase from '../firebase';
 
-export default function mapDispatchToLoginProps(dispatch) {
+export default function mapDispatchToLoginProps(dispatch, ownProps) {
   return {
-    loginByUsernamePassword: (username, password, navigation) => {
+    loginByUsernamePassword: (username, password) => {
       dispatch({
         type: 'LOGIN_ING'
       })
-      return loginBusiness(dispatch)(username, password, navigation);
+      return loginBusiness(dispatch)(username, password, ownProps.navigation);
     },
 
     loginByFacebook: async () => {
@@ -37,17 +37,22 @@ export default function mapDispatchToLoginProps(dispatch) {
 
     },
 
-    loginAuto: (navigation) => {
+    loginAuto: () => {
 
       firebase.auth().onAuthStateChanged((user) => {
-        const data = user;
-        dispatch({
-          type: 'LOGIN_SUCCESS',
-          uid: data.uid,
-          userInfo: data.email,
-        })
         if (user != null) {
-          navigation.navigate('Tabs');
+          dispatch({
+            type: 'LOGIN_SUCCESS',
+            uid: user.uid,
+            userInfo: {
+              displayName: user.displayName,
+              photoURL: `${user.photoURL}/picture?type=normal`,
+              email: user.email
+            },
+          })
+          ownProps.navigation.navigate('Tabs');
+        } else {
+          ownProps.navigation.navigate('LoginScreen');
         }
       });
 
@@ -71,6 +76,6 @@ const loginBusiness = (dispatch) => (username, password, navigation) => {
           navigation.navigate("Tabs");
         });
     } catch (error) {
-      console.log(error.toString());
+      alert(error.toString());
     }
 }
