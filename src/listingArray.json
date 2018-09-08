@@ -255,7 +255,7 @@
         "city": "HCMC",
         "country": "Vietnam",
         "district": "Bình Thạnh",
-        "street": "59 Đường Ngô Tất Tố",
+        "street": "17 Dien Bien Phu",
         "ward": ""
       },
       "contactInfo": {
@@ -263,23 +263,23 @@
         "phoneNumber": "+84938448321"
       },
       "coordinates": {
-        "latitude": 10.793613,
-        "longitude": 106.711012
+        "latitude": 10.797425,
+        "longitude": 106.706055
       },
       "description": {
-        "bath": 2,
-        "bdrm": 3,
-        "buildingName": "City Garden D4 Fake",
+        "bath": 1,
+        "bdrm": 2,
+        "buildingName": "Saigon View Residences",
         "currency": "usd",
         "leaseType": "residential",
-        "price": 1800,
+        "price": 800,
         "size": "210",
         "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
         "type": "high-rise apartment"
       },
       "id": 242322424200,
       "imgUrl": [
-        "https://en.sekaiproperty.com/img/sekai-property-building-image/file/3908/7342ebef-d7af-40a3-b053-a4aa4135eceb.jpg",
+        "http://img.asiabooking.com.vn/saigon-view-residences-279j176076.jpg",
         "http://www.honeycomb.vn/vnt_upload/product/09_2017/thumbs/420_City_Garden_wwwhoneycombvn_41_1.jpg",
         "http://citygardensaigon.com/wp-content/uploads/2015/05/img6.jpg"
       ],
@@ -393,5 +393,25 @@
       "publishTime": "2018-09-01T09:21:52.772Z",
       "publisher": "Tram T Tran"
     }
-  ]
+  ],
+  "users": {
+    "5Bha1uexiQcfKPXqxbkIZxFcokC3": {
+      "email": "kitty@gmail.com",
+      "uid": "5Bha1uexiQcfKPXqxbkIZxFcokC3"
+    },
+    "CS2nol1mgIanDB8APpUKKD1KBzB2": {
+      "email": "xcoder@gmail.com",
+      "uid": "CS2nol1mgIanDB8APpUKKD1KBzB2"
+    },
+    "MtHqzclrdDcnQNIzKCMogJ8d80j2": {
+      "email": "unicorn@gmail.com",
+      "uid": "MtHqzclrdDcnQNIzKCMogJ8d80j2"
+    },
+    "9v5DpidDrTcUDAcPvqn1YusCkPw1": {
+      "email": "arzsfewfee_1535724341@tfbnw.net",
+      "uid": "9v5DpidDrTcUDAcPvqn1YusCkPw1",
+      "type": "facebook"
+    }
+  }
 }
+
