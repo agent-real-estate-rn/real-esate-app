@@ -21,6 +21,7 @@
     "preset": "jest-expo"
   },
   "dependencies": {
+    "@ptomasroos/react-native-multi-slider": "^1.0.0",
     "expo": "^27.0.1",
     "firebase": "^5.4.0",
     "geolib": "^2.0.24",

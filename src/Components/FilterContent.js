@@ -21,44 +21,44 @@ export default class FilterContent extends Component {
   
   render() {
     return (
-      <View>
-        <View style={{alignItems: 'center'}}><Text style={styles.titleText}>Filter</Text></View>
+      <View style={{flex: 1, justifyContent: 'center'}}>
+        <View style={{justifyContent: 'flex-start', alignSelf: 'center'}}><Text style={styles.titleText}>Filter</Text></View>
         <View style={styles.lineDivider} />
-        <Text> Price:  ${this.state.priceRange[0]} - ${this.state.priceRange[1]}</Text>
+        <Text> Price:  {this.state.priceRange[0]} - {this.state.priceRange[1]}</Text>
         <MultiSlider 
-          values={this.state.priceRange} 
-          sliderLength={280}
+          values={this.state.priceRange}
           min={0}
           max={2000}
           step={25}
-          markerStyle={{height:15, width:15}}  
+          selectedStyle={{backgroundColor: '#223A5E'}}
+          markerStyle={{height:15, width:15, backgroundColor: '#223A5E'}}  
           onValuesChange={(valuesArray)=> this.setState({priceRange: valuesArray})}
         />
         <Text> Size (sqm):  {this.state.size[0]} - {this.state.size[1]}</Text>
         <MultiSlider 
-          values={this.state.size} 
-          sliderLength={280}
+          values={this.state.size}
           min={0}
           max={400}
           step={5}
-          markerStyle={{height:15, width:15}}  
+          selectedStyle={{backgroundColor: '#223A5E'}}
+          markerStyle={{height:15, width:15, backgroundColor: '#223A5E'}}  
           onValuesChange={(valuesArray)=> this.setState({size: valuesArray})}
         />
         <Text> Beds: </Text>
         <ButtonGroup
           onPress={(selectedIndex)=> this.setState({beds: selectedIndex})}
           selectedIndex={this.state.beds}
-          buttons={[0,1,2,3,4,'5+']}
-          containerStyle={{height: 30}}
+          buttons={[1,2,3,4,'5+']}
+          containerStyle={{justifyContent: 'flex-start', height: 30, marginLeft: 0, marginRight: 0}}
         />
         <Text> Bath: </Text>
         <ButtonGroup
           onPress={(selectedIndex)=> this.setState({bath: selectedIndex})}
           selectedIndex={this.state.bath}
-          buttons={[0,1,2,3,'4+']}
-          containerStyle={{height: 30}}
+          buttons={[1,2,3,'4+']}
+          containerStyle={{justifyContent: 'flex-start', height: 30, marginLeft: 0, marginRight: 0}}
         />
-        <View style={{paddingBottom:20}} />
+        <View style={{paddingBottom:10}} />
         <CheckBox
           title='Parking:                                               '
           checked={this.state.parking}
@@ -66,9 +66,9 @@ export default class FilterContent extends Component {
           onPress={()=> this.setState({parking: !this.state.parking})}
           iconRight
           right
-          containerStyle = {{backgroundColor: 'white'}}
+          containerStyle = {{backgroundColor: 'white', marginLeft: 0, marginRight: 0}}
           checkedIcon='check-square'
-          checkedColor='#bfbfbf'
+          checkedColor='#223A5E'
         />
         <CheckBox
           title='Security:                                              '
@@ -77,9 +77,9 @@ export default class FilterContent extends Component {
           onPress={()=> this.setState({security: !this.state.security})}
           iconRight
           right
-          containerStyle = {{backgroundColor: 'white'}}
+          containerStyle = {{backgroundColor: 'white', marginLeft: 0, marginRight: 0}}
           checkedIcon='check-square'
-          checkedColor='#bfbfbf'
+          checkedColor='#223A5E'
         />
         <CheckBox
           title='Cleaning Service:                              '
@@ -88,22 +88,20 @@ export default class FilterContent extends Component {
           onPress={()=> this.setState({cleaning: !this.state.cleaning})}
           iconRight
           right
-          containerStyle = {{backgroundColor: 'white'}}
+          containerStyle = {{backgroundColor: 'white', marginLeft: 0, marginRight: 0}}
           checkedIcon='check-square'
-          checkedColor='#bfbfbf'
+          checkedColor='#223A5E'
         />
-        <View style={{margin:20}} />
-
-        <TouchableOpacity
-          style={styles.btn}
-          activeOpacity={0.9}
-          onPress={()=>{this.props.applyFilter({...this.state}); this.props.toggleModal()}}
-        >
-          <Text style={styles.btnText}>Apply</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.btnClose} onPress={()=>this.props.toggleModal()}>
-          <Icon name='times-circle' type='font-awesome' color='#cecece' />
-        </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.btn}
+            activeOpacity={0.9}
+            onPress={()=>{this.props.applyFilter({...this.state}); this.props.toggleModal()}}
+          >
+            <Text style={styles.btnText}>Apply</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.btnClose} onPress={()=>this.props.toggleModal()}>
+            <Icon name='times-circle' type='font-awesome' color='#223A5E' />
+          </TouchableOpacity>
       </View>
     )
   }
@@ -113,7 +111,7 @@ export default class FilterContent extends Component {
 const styles = StyleSheet.create({
   lineDivider: {
     borderBottomColor: "grey",
-    borderBottomWidth: 0.3,
+    borderBottomWidth: 1,
     marginBottom: 20,
     marginTop: 20
   },
@@ -122,11 +120,12 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   btn: {
-    alignSelf: 'center',
-    padding: 5,
-    backgroundColor: '#cecece',
+    alignItems: 'center',
+    alignContent: 'flex-end',
+    padding: 10,
+    backgroundColor: '#223A5E',
     borderRadius: 5,
-    width: 270,
+    marginTop: 20
   },
   btnText: {
     alignSelf: 'center',
@@ -136,6 +135,6 @@ const styles = StyleSheet.create({
   btnClose: {
     position: 'absolute',
     top: 0,
-    right: 5
+    right: 0
   },
 })

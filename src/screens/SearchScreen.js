@@ -42,7 +42,6 @@ export default class SearchScreen extends Component {
   }
 
   flip = () => {
-    const flipText = '';
     if (!this.state.isFlipped) {
       this.props.navigation.setParams({flipText: 'Map'});
     } else {
@@ -121,18 +120,18 @@ const styles = StyleSheet.create({
     width: 60
   },
   modalContent: {
-    backgroundColor: 'white',
+    backgroundColor: '#f7f7f7',
     padding: 22,
     alignItems: 'center',
-    borderRadius: 4,
+    alignSelf: 'center',
+    borderRadius: 5,
     borderColor: 'rgba(0, 0, 0, 0.1)',
     height: 650
   },
   bottomModal: {
     justifyContent: 'flex-start',
-    marginTop: 90,
-    paddingRight: 30,
-    width: 370,
-    
+    alignContent: 'center',
+    flex: 1
+
   },
 })

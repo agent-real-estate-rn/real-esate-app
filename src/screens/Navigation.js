@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {View} from 'react-native';
 import { createBottomTabNavigator, createStackNavigator, createSwitchNavigator } from 'react-navigation';
 import { Icon } from 'react-native-elements';
 import LoginScreen from './Login';
@@ -47,19 +48,58 @@ const Tabs = createBottomTabNavigator({
     screen: SearchStack,
     navigationOptions: {
       tabBarLabel: 'Search',
-      tabBarIcon: ({tintColor}) =>( <Icon name='search' type='material_community' color={tintColor} />)
+      tabBarIcon: ({tintColor, focused}) =>
+        (<View style={[{borderTopWidth: 4, flex: 1, justifyContent: 'flex-start', width: '100%'},(focused) ? {borderTopColor: tintColor} : {borderTopColor:'transparent'}]}>
+          <Icon 
+            name='search' 
+            type='material_community' 
+            color={tintColor} 
+            iconStyle={{fontSize: 30, justifyContent: 'center'}} 
+            containerStyle={{alignItems: 'center'}}
+          />
+        </View>)
     }
   },
   SubscriptionStack: {
     screen: SubscriptionStack,
     navigationOptions: {
       tabBarLabel: 'Subscriptions',
-      tabBarIcon: ({tintColor}) =>( <Icon name='chat' type='material_community' color={tintColor} />)
-    }
+      tabBarIcon: ({tintColor, focused}) =>
+        (<View style={[{borderTopWidth: 4, flex: 1, justifyContent: 'flex-start', width: '100%'},(focused) ? {borderTopColor: tintColor} : {borderTopColor:'transparent'}]}>
+          <Icon 
+            name='chat' 
+            type='material_community' 
+            color={tintColor} 
+            iconStyle={{fontSize: 30, justifyContent: 'center'}} 
+            containerStyle={{alignItems: 'center'}}
+          />
+        </View>)
+      }
   }
 }, {
   labeled: true,
   initialRouteName: 'SearchStack',
+  swipeEnabled: true,
+  animationEnabled: true,
+  tabBarOptions: {
+    activeTintColor: '#223A5E',
+    style: {
+      justifyContent: 'center',
+      backgroundColor: '#fff',
+      borderTopColor: 'transparent',
+      shadowColor: 'rgba(0,0,0,.15)',
+      shadowOffset: {
+        width: 1,
+        height: 2
+      },
+    shadowOpacity: 0.8,
+    shadowRadius: 4
+    },
+    tabBarSelectedItemStyle: {
+      borderBottomWidth: 2,
+      borderBottomColor: 'red',
+    },
+  }
 });
 
 const MainStack = createSwitchNavigator({
