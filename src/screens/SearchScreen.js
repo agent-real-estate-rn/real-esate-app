@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import { Text, TouchableOpacity, Easing, StyleSheet } from 'react-native';
+import { View, Text, Button, Animated, TouchableOpacity, Easing, StyleSheet } from 'react-native';
 import ListView from './ListView';
 import MapSearch from '../Components/MapSearch';
 import FlipView from 'react-native-flip-view-next';
+import Modal from 'react-native-modal'
+import FilterContent from '../Components/FilterContent'
 
 export default class SearchScreen extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -14,6 +16,14 @@ export default class SearchScreen extends Component {
           onPress={() => navigation.getParam('flipScreen')()}
         ><Text style={styles.btnText}>{navigation.getParam('flipText') || 'List'}</Text>
         </TouchableOpacity>
+      ),
+      headerLeft: (
+        <TouchableOpacity
+          style={styles.btnLeft}
+          activeOpacity={0.9}
+          onPress={() => navigation.getParam('toggleModal')()}
+        ><Text style={styles.btnText}>Filter</Text>
+        </TouchableOpacity>
       )
     }
   }
@@ -21,12 +31,14 @@ export default class SearchScreen extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { isFlipped: false};
+    this.state = { isFlipped: false, modalVisible: false, filterData: null, };
     this.flip = this.flip.bind(this);
+    this.toggleModal = this.toggleModal.bind(this);
+    this.applyFilter = this.applyFilter.bind(this);
   }
 
   componentDidMount() {
-    this.props.navigation.setParams({flipScreen: this.flip, flipText: "List"});
+    this.props.navigation.setParams({flipScreen: this.flip, flipText: "List", toggleModal: this.toggleModal});
   }
 
   flip = () => {
@@ -41,9 +53,36 @@ export default class SearchScreen extends Component {
     });
   }
 
-  frontSide() {
-    return (<MapSearch toggleMap={this.flip}/>);
+  toggleModal = () => {
+    this.setState({modalVisible: !this.state.modalVisible})
   }
+
+  applyFilter = (filterData) => {
+    this.setState({filterData: filterData})
+  }
+
+  renderModalContent = () => (
+    <View style={styles.modalContent}>
+      <FilterContent toggleModal={this.toggleModal} applyFilter={this.applyFilter} />
+    </View>
+  );
+
+  frontSide() {
+    return (
+      <View style={{flex:1}}>
+        <MapSearch toggleMap={this.flip} filterData={this.state.filterData}/>
+        <Modal
+          isVisible={this.state.modalVisible} 
+          style={styles.bottomModal} 
+          onBackdropPress={this.toggleModal} 
+          swipeDirection='right' 
+          onSwipe={this.toggleModal}
+        >
+          {this.renderModalContent()}
+        </Modal>
+      </View>);
+  }
+
   backSide() {
     return(<ListView navigation={this.props.navigation}/>);
   }
@@ -73,5 +112,27 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     fontSize: 16,
     color: '#ffffff'
-  }
+  },
+  btnLeft: {
+    marginLeft: 20,
+    padding: 5,
+    backgroundColor: '#223A5E',
+    borderRadius: 5,
+    width: 60
+  },
+  modalContent: {
+    backgroundColor: 'white',
+    padding: 22,
+    alignItems: 'center',
+    borderRadius: 4,
+    borderColor: 'rgba(0, 0, 0, 0.1)',
+    height: 650
+  },
+  bottomModal: {
+    justifyContent: 'flex-start',
+    marginTop: 90,
+    paddingRight: 30,
+    width: 370,
+    
+  },
 })
