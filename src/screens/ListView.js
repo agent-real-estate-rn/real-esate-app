@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
-import { Text, StyleSheet, View, Image, FlatList, TouchableOpacity, Dimensions } from "react-native";
+import { Text, View, FlatList, Dimensions } from "react-native";
 //import TEST_DATA from "../listingArray.json";
 import styles from '../style/listViewStyle';
 import Card from '../Components/Card';
@@ -30,7 +30,7 @@ class ListView extends Component {
           )}
         />
         ) : (
-          <Text style={{alignSelf: 'center', color: '#ccc'}}> No properties found! </Text>
+          <Text style={{alignSelf: 'center', color: '#c8c8c8'}}> No properties found! </Text>
         )}
       </View>
     );

@@ -52,7 +52,7 @@ export default function mapDispatchToLoginProps(dispatch, ownProps) {
           })
           ownProps.navigation.navigate('Tabs');
         } else {
-          ownProps.navigation.navigate('LoginScreen');
+          setTimeout(() => ownProps.navigation.navigate('LoginScreen'), 2000);
         }
       });
 

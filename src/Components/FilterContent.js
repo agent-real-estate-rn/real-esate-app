@@ -1,10 +1,10 @@
-import React, { Component } from 'react'
-import { Text, View, StyleSheet, TouchableOpacity } from 'react-native'
-import MultiSlider from '@ptomasroos/react-native-multi-slider'
-import { ButtonGroup, CheckBox, Button, Icon } from 'react-native-elements'
-
-
-export default class FilterContent extends Component {
+import React, { Component } from 'react';
+import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
+import MultiSlider from '@ptomasroos/react-native-multi-slider';
+import { ButtonGroup, CheckBox, Icon } from 'react-native-elements';
+import { connect } from 'react-redux';
+import mapDispatchToSearchProps from '../actions/search';
+class FilterContent extends Component {
   constructor(props) {
     super(props)
   
@@ -16,7 +16,16 @@ export default class FilterContent extends Component {
        parking: false,
        security: false,
        cleaning: false,
+       hasCategories: false
     }
+
+    this.applyFilter = this.applyFilter.bind(this);
+  }
+
+  applyFilter() {
+    this.props.updateFilter({...this.state}); 
+    this.props.toggleModal();
+    this.props.getFilteredPropertiesList(this.props.filteredPropertiesList, this.props.polygon, this.props.filter);
   }
   
   render() {
@@ -32,7 +41,7 @@ export default class FilterContent extends Component {
           step={25}
           selectedStyle={{backgroundColor: '#223A5E'}}
           markerStyle={{height:15, width:15, backgroundColor: '#223A5E'}}  
-          onValuesChange={(valuesArray)=> this.setState({priceRange: valuesArray})}
+          onValuesChange={(valuesArray)=> this.setState({priceRange: valuesArray, hasCategories: true})}
         />
         <Text> Size (sqm):  {this.state.size[0]} - {this.state.size[1]}</Text>
         <MultiSlider 
@@ -42,18 +51,18 @@ export default class FilterContent extends Component {
           step={5}
           selectedStyle={{backgroundColor: '#223A5E'}}
           markerStyle={{height:15, width:15, backgroundColor: '#223A5E'}}  
-          onValuesChange={(valuesArray)=> this.setState({size: valuesArray})}
+          onValuesChange={(valuesArray)=> this.setState({size: valuesArray, hasCategories: true})}
         />
         <Text> Beds: </Text>
         <ButtonGroup
-          onPress={(selectedIndex)=> this.setState({beds: selectedIndex})}
+          onPress={(selectedIndex)=> this.setState({beds: selectedIndex, hasCategories: true})}
           selectedIndex={this.state.beds}
           buttons={[1,2,3,4,'5+']}
           containerStyle={{justifyContent: 'flex-start', height: 30, marginLeft: 0, marginRight: 0}}
         />
         <Text> Bath: </Text>
         <ButtonGroup
-          onPress={(selectedIndex)=> this.setState({bath: selectedIndex})}
+          onPress={(selectedIndex)=> this.setState({bath: selectedIndex, hasCategories: true})}
           selectedIndex={this.state.bath}
           buttons={[1,2,3,'4+']}
           containerStyle={{justifyContent: 'flex-start', height: 30, marginLeft: 0, marginRight: 0}}
@@ -62,8 +71,8 @@ export default class FilterContent extends Component {
         <CheckBox
           title='Parking:                                               '
           checked={this.state.parking}
-          onIconPress={()=> this.setState({parking: !this.state.parking})}
-          onPress={()=> this.setState({parking: !this.state.parking})}
+          onIconPress={()=> this.setState({parking: !this.state.parking, hasCategories: true})}
+          onPress={()=> this.setState({parking: !this.state.parking, hasCategories: true})}
           iconRight
           right
           containerStyle = {{backgroundColor: 'white', marginLeft: 0, marginRight: 0}}
@@ -73,8 +82,8 @@ export default class FilterContent extends Component {
         <CheckBox
           title='Security:                                              '
           checked={this.state.security}
-          onIconPress={()=> this.setState({security: !this.state.security})}
-          onPress={()=> this.setState({security: !this.state.security})}
+          onIconPress={()=> this.setState({security: !this.state.security, hasCategories: true})}
+          onPress={()=> this.setState({security: !this.state.security, hasCategories: true})}
           iconRight
           right
           containerStyle = {{backgroundColor: 'white', marginLeft: 0, marginRight: 0}}
@@ -84,8 +93,8 @@ export default class FilterContent extends Component {
         <CheckBox
           title='Cleaning Service:                              '
           checked={this.state.cleaning}
-          onIconPress={()=> this.setState({cleaning: !this.state.cleaning})}
-          onPress={()=> this.setState({cleaning: !this.state.cleaning})}
+          onIconPress={()=> this.setState({cleaning: !this.state.cleaning, hasCategories: true})}
+          onPress={()=> this.setState({cleaning: !this.state.cleaning, hasCategories: true})}
           iconRight
           right
           containerStyle = {{backgroundColor: 'white', marginLeft: 0, marginRight: 0}}
@@ -93,12 +102,14 @@ export default class FilterContent extends Component {
           checkedColor='#223A5E'
         />
           <TouchableOpacity
-            style={styles.btn}
+            style={!this.state.hasCategories ? styles.btnDiabled : styles.btn}
             activeOpacity={0.9}
-            onPress={()=>{this.props.applyFilter({...this.state}); this.props.toggleModal()}}
+            disabled={!this.state.hasCategories}
+            onPress={this.applyFilter}
           >
             <Text style={styles.btnText}>Apply</Text>
           </TouchableOpacity>
+
           <TouchableOpacity style={styles.btnClose} onPress={()=>this.props.toggleModal()}>
             <Icon name='times-circle' type='font-awesome' color='#223A5E' />
           </TouchableOpacity>
@@ -106,6 +117,13 @@ export default class FilterContent extends Component {
     )
   }
 }
+const mapStateToProps = (state) => {
+  return {...state}
+}
+export default connect(
+  mapStateToProps,
+  mapDispatchToSearchProps
+)(FilterContent);
 
 
 const styles = StyleSheet.create({
@@ -137,4 +155,12 @@ const styles = StyleSheet.create({
     top: 0,
     right: 0
   },
+  btnDiabled: {
+    alignItems: 'center',
+    alignContent: 'flex-end',
+    padding: 10,
+    backgroundColor: '#ccc',
+    borderRadius: 5,
+    marginTop: 20
+  }
 })
