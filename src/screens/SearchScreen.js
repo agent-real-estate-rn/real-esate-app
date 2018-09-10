@@ -79,7 +79,8 @@ export default class SearchScreen extends Component {
         >
           {this.renderModalContent()}
         </Modal>
-      </View>);
+      </View>
+    );
   }
 
   backSide() {

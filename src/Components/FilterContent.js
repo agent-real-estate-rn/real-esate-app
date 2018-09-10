@@ -25,7 +25,7 @@ class FilterContent extends Component {
   applyFilter() {
     this.props.updateFilter({...this.state}); 
     this.props.toggleModal();
-    this.props.getFilteredPropertiesList(this.props.filteredPropertiesList, this.props.polygon, this.props.filter);
+    this.props.getFilteredPropertiesList(this.props.filteredPropertiesList, this.props.polygon, this.props.filterData);
   }
   
   render() {
