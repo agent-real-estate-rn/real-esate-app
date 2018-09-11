@@ -291,7 +291,7 @@
         "city": "HCMC",
         "country": "Vietnam",
         "district": "District 2",
-        "street": "25 duong 46",
+        "street": "120 Xuan Thuy",
         "ward": "Thao Dien"
       },
       "contactInfo": {
@@ -299,24 +299,24 @@
         "phoneNumber": "+84938448001"
       },
       "coordinates": {
-        "latitude": 10.808564,
-        "longitude": 106.729872
+        "latitude": 10.802914,
+        "longitude": 106.729716
       },
       "description": {
         "bath": 1,
-        "bdrm": 1,
-        "buildingName": "iCasa Fake",
+        "bdrm": 2,
+        "buildingName": "Rainbow Inn",
         "currency": "usd",
         "leaseType": "residential",
-        "price": 500,
-        "size": "55 sqm",
-        "text": "Serviced apartment in the heart of Thao Dien. Affordable and fine dining near by.",
+        "price": 600,
+        "size": "45 sqm",
+        "text": "Colorful serviced apartment in perfectly located in Thao Dien. Affordable and fine dining near by.",
         "type": "serviced apartment"
       },
       "id": 48999800,
       "imgUrl": [
-        "https://t-ec.bstatic.com/images/hotel/max1024x768/147/147389433.jpg",
-        "https://a0.muscache.com/im/pictures/a9cb43c3-ee31-4288-8647-34948090a50a.jpg?aki_policy=xx_large"
+        "https://a0.muscache.com/im/pictures/a9cb43c3-ee31-4288-8647-34948090a50a.jpg?aki_policy=xx_large",
+        "https://t-ec.bstatic.com/images/hotel/max1024x768/147/147389433.jpg"
       ],
       "publishTime": "2018-06-22T10:21:52.772Z",
       "publisher": "Icasa Incorporated"
@@ -326,7 +326,7 @@
         "city": "HCMC",
         "country": "Vietnam",
         "district": "Binh Thanh",
-        "street": "91 Nguyễn Hữu Cảnh",
+        "street": "107 Nguyễn Hữu Cảnh",
         "ward": "Phường 22"
       },
       "contactInfo": {
@@ -340,17 +340,17 @@
       "description": {
         "bath": 1,
         "bdrm": 2,
-        "buildingName": "The Manor D4 Faake",
+        "buildingName": "The Birch Heaven",
         "currency": "usd",
         "leaseType": "residential",
-        "price": 700,
-        "size": "50 sqm",
-        "text": "The Manor located in the heart of Binh Thanh. Fully furnished room with gym, sauna, cleaning, change bedsheet, 24 hours security, internet, cable tv, and parking ",
+        "price": 350,
+        "size": "40 sqm",
+        "text": "The Birch Heaven located in the heart of Binh Thanh. Fully furnished room with gym, sauna, cleaning, change bedsheet, 24 hours security, internet, cable tv, and parking ",
         "type": "high-rise apartment"
       },
       "id": 23144864531,
       "imgUrl": [
-        "http://www.apartmentforrenthcm.com/kcfinder/upload/images/the-manor-for-rent-2%2819%29.jpg",
+        "https://t-ec.bstatic.com/images/hotel/max1024x768/147/147389433.jpg",
         "https://www.saigonrest.com/upload/condos-for-rent-1521777280.jpg?w=510&h=340&zc=0&q=100&",
         "http://www.serviced-apartment.vn/images/project/The-Manor_2-The%20Manor.jpg"
       ],
@@ -374,20 +374,20 @@
         "longitude": 106.7108127
       },
       "description": {
-        "bath": 1,
-        "bdrm": 2,
-        "buildingName": "The Manor D4 Fake",
+        "bath": 2,
+        "bdrm": 4,
+        "buildingName": "Huong Vy Suites",
         "currency": "usd",
         "leaseType": "residential",
         "price": 700,
         "size": "50 sqm",
-        "text": "The Manor located in the heart of Binh Thanh. Fully furnished room with gym, sauna, cleaning, change bedsheet, 24 hours security, internet, cable tv, and parking ",
+        "text": "Huong Vy Suites in the heart of Binh Thanh. Fully furnished room with gym, sauna, cleaning, change bedsheet, 24 hours security, internet, cable tv, and parking ",
         "type": "high-rise apartment"
       },
       "id": 32301600,
       "imgUrl": [
-        "http://www.apartmentforrenthcm.com/kcfinder/upload/images/the-manor-for-rent-2%2819%29.jpg",
         "https://www.saigonrest.com/upload/condos-for-rent-1521777280.jpg?w=510&h=340&zc=0&q=100&",
+        "http://www.apartmentforrenthcm.com/kcfinder/upload/images/the-manor-for-rent-2%2819%29.jpg",
         "http://www.serviced-apartment.vn/images/project/The-Manor_2-The%20Manor.jpg"
       ],
       "publishTime": "2018-09-01T09:21:52.772Z",
@@ -414,4 +414,5 @@
     }
   }
 }
+
 
