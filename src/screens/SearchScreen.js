@@ -68,13 +68,13 @@ export default class SearchScreen extends Component {
 
   frontSide() {
     return (
-      <View style={{flex:1}}>
-        <MapSearch toggleMap={this.flip}/>
+      <View style={{flex:1}} toggleMap={this.flip}>
+        <MapSearch />
         <Modal
-          isVisible={this.state.modalVisible} 
-          style={styles.bottomModal} 
-          onBackdropPress={this.toggleModal} 
-          swipeDirection='right' 
+          isVisible={this.state.modalVisible}
+          style={styles.bottomModal}
+          onBackdropPress={this.toggleModal}
+          swipeDirection='right'
           onSwipe={this.toggleModal}
         >
           {this.renderModalContent()}
@@ -85,7 +85,7 @@ export default class SearchScreen extends Component {
   backSide() {
     return(<ListView navigation={this.props.navigation}/>);
   }
-  
+
   render() {
     return(
       <FlipView style={{flex: 1}}

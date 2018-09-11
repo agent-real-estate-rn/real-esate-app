@@ -76,7 +76,7 @@ class MapSearch extends Component {
 
   getPolygonAndMarkers() {
     let polygonArr = this.state.panDrag.concat(this.state.panDrag[0]);
-    this.props.getFilteredPropertiesList(this.props.propertyList, polygonArr, this.props.filterData);
+    this.props.getFilteredPropertiesList(this.props.propertyList, polygonArr, this.props.filterCategory);
 
     this.setState({
       isDrawing: !this.state.isDrawing,
@@ -121,13 +121,14 @@ class MapSearch extends Component {
   }
 
   render() {
+    console.log(this.props);
     return (
       <View style = {[{flex: 1, position: 'relative', opacity: 1}]}>
         <MapView
           style = {{flex: 1}}
           initialRegion={this.state.location}
           showsUserLocation = {true}
-          showsMyLocationButton = {true} 
+          showsMyLocationButton = {true}
           scrollEnabled = {!this.state.isDrawing}
           onPanDrag = {e => this.panDragMap(e)}
           ref={(map) => this.map = map}

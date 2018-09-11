@@ -5,7 +5,7 @@ const initialState = {
   propertyList: [],
   filteredPropertiesList: [],
   snapshotUri: '',
-  filter: {},
+  filterCategory: {},
   polygon: []
 };
 
@@ -14,7 +14,7 @@ export default searchOnMap = (state = initialState, action) => {
     case 'INITIAL_MAP': {
       return {...state, initialLocation: action.initialRegion, propertyList: action.propertyList};
     };
-    
+
     case 'FILTER_PROPERTIES_PENDING': {
       return {...state, loading: true}
     };
@@ -32,7 +32,7 @@ export default searchOnMap = (state = initialState, action) => {
     };
 
     case 'GET_FILTER': {
-      return {...state, filter: action.filter};
+      return {...state, filterCategory: action.filter};
     };
 
     default: return state;

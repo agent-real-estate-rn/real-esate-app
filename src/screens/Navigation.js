@@ -50,11 +50,11 @@ const Tabs = createBottomTabNavigator({
       tabBarLabel: 'Search',
       tabBarIcon: ({tintColor, focused}) =>
         (<View style={[{borderTopWidth: 4, flex: 1, justifyContent: 'flex-start', width: '100%'},(focused) ? {borderTopColor: tintColor} : {borderTopColor:'transparent'}]}>
-          <Icon 
-            name='search' 
-            type='material_community' 
-            color={tintColor} 
-            iconStyle={{fontSize: 30, justifyContent: 'center'}} 
+          <Icon
+            name='search'
+            type='material_community'
+            color={tintColor}
+            iconStyle={{fontSize: 30, justifyContent: 'center'}}
             containerStyle={{alignItems: 'center'}}
           />
         </View>)
@@ -66,11 +66,11 @@ const Tabs = createBottomTabNavigator({
       tabBarLabel: 'Subscriptions',
       tabBarIcon: ({tintColor, focused}) =>
         (<View style={[{borderTopWidth: 4, flex: 1, justifyContent: 'flex-start', width: '100%'},(focused) ? {borderTopColor: tintColor} : {borderTopColor:'transparent'}]}>
-          <Icon 
-            name='chat' 
-            type='material_community' 
-            color={tintColor} 
-            iconStyle={{fontSize: 30, justifyContent: 'center'}} 
+          <Icon
+            name='chat'
+            type='material_community'
+            color={tintColor}
+            iconStyle={{fontSize: 30, justifyContent: 'center'}}
             containerStyle={{alignItems: 'center'}}
           />
         </View>)
@@ -116,7 +116,7 @@ const MainStack = createSwitchNavigator({
     screen: Tabs
   }
 }, {
-  initialRouteName: 'SplashScreen',
+  initialRouteName: 'Tabs',
   headerMode: 'none',
   navigationOptions: {
     headerVisible: false,

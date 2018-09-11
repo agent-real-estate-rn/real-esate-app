@@ -7,7 +7,7 @@ import mapDispatchToSearchProps from '../actions/search';
 class FilterContent extends Component {
   constructor(props) {
     super(props)
-  
+
     this.state = {
        priceRange: [0,2000],
        beds: 0,
@@ -23,34 +23,39 @@ class FilterContent extends Component {
   }
 
   applyFilter() {
-    this.props.updateFilter({...this.state}); 
+    this.props.updateFilter({...this.state});
     this.props.toggleModal();
-    this.props.getFilteredPropertiesList(this.props.filteredPropertiesList, this.props.polygon, this.props.filter);
+
+    this.props.getFilteredPropertiesList(
+      this.props.filteredPropertiesList,
+      this.props.polygon,
+      this.props.filterCategory
+    );
   }
-  
+
   render() {
     return (
       <View style={{flex: 1, justifyContent: 'center'}}>
         <View style={{justifyContent: 'flex-start', alignSelf: 'center'}}><Text style={styles.titleText}>Filter</Text></View>
         <View style={styles.lineDivider} />
         <Text> Price:  {this.state.priceRange[0]} - {this.state.priceRange[1]}</Text>
-        <MultiSlider 
+        <MultiSlider
           values={this.state.priceRange}
           min={0}
           max={2000}
           step={25}
           selectedStyle={{backgroundColor: '#223A5E'}}
-          markerStyle={{height:15, width:15, backgroundColor: '#223A5E'}}  
+          markerStyle={{height:15, width:15, backgroundColor: '#223A5E'}}
           onValuesChange={(valuesArray)=> this.setState({priceRange: valuesArray, hasCategories: true})}
         />
         <Text> Size (sqm):  {this.state.size[0]} - {this.state.size[1]}</Text>
-        <MultiSlider 
+        <MultiSlider
           values={this.state.size}
           min={0}
           max={400}
           step={5}
           selectedStyle={{backgroundColor: '#223A5E'}}
-          markerStyle={{height:15, width:15, backgroundColor: '#223A5E'}}  
+          markerStyle={{height:15, width:15, backgroundColor: '#223A5E'}}
           onValuesChange={(valuesArray)=> this.setState({size: valuesArray, hasCategories: true})}
         />
         <Text> Beds: </Text>
