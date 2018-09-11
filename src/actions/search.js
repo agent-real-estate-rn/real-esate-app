@@ -1,5 +1,6 @@
 import firebase from '../firebase';
 import geolib from 'geolib';
+import staticData from '../listingArray.json';
 
 export default function mapDispatchToSearchProps(dispatch, ownprops) {
   return {
@@ -10,33 +11,56 @@ export default function mapDispatchToSearchProps(dispatch, ownprops) {
         longitude: 106.7061763,
         latitudeDelta: 0.04292,
         longitudeDelta: 0.03021
-      }
-      firebase.database().ref('propertyList').once('value').then((snapshot) => {
-        propertyList = snapshot.val();
-        dispatch({
-          type: 'INITIAL_MAP',
-          initialRegion,
-          propertyList: propertyList
-        });
+      };
+      //firebase
+      // firebase.database().ref('propertyList').once('value').then((snapshot) => {
+      //   propertyList = snapshot.val();
+      //   dispatch({
+      //     type: 'INITIAL_MAP',
+      //     initialRegion,
+      //     propertyList: propertyList
+      //   });
+      // });
+
+      //json
+      dispatch({
+        type: 'INITIAL_MAP',
+        initialRegion,
+        propertyList: staticData
       });
     },
 
     getFilteredPropertiesList: (propertyList, polygonArr, filterObj) => {
       let listWithFilter;
-      if (polygonArr.length > 0) {
-        filterByPolygon(propertyList, polygonArr).then(data => {
-          if (filterObj && Object.keys(filterObj).length > 0) {
-            listWithFilter = filterProperties(filterObj, data);
-          } else {
-            listWithFilter = data;
-          }
+      if (polygonArr.length > 0) {}
+        // let polygonFilter = filterByPolygon(propertyList, polygonArr);
+        //   if (filterObj && Object.keys(filterObj).length > 0) {
+        //     listWithFilter = filterProperties(filterObj, polygonFilter);
+        //   } else {
+        //     listWithFilter = data;
+        //   }
+        //   dispatch({
+        //     type: 'FILTER_PROPERTIES_BY_CATEGORIES',
+        //     properties: listWithFilter
+        //   });
+        const payload = new Promise((resolve) => {
+          const listProperties = propertyList.map((item) => {
+            // if (geolib.isPointInside(item.coordinates, polygonArr)) {
+            //   return item;
+            // }
+            return item;
+          });
+          resolve(listProperties);
         });
         dispatch({
           type: 'FILTER_PROPERTIES',
-          polygon: polygonArr,
-          propertiesFulfilled: listWithFilter
+          payload,
+          polygon: polygonArr
         });
-      }
+        // dispatch({
+        //   type: 'FILTER_PROPERTIES',
+        //   polygon: polygonArr
+        // });
     },
 
     resetPropertyList: () => {
@@ -104,13 +128,10 @@ const filterProperties = (filterObj, propertyList) => {
 }
 
 const filterByPolygon = (propertyList, polygonArr) => {
-  const payload = new Promise((resolve) => {
     let listProperties = propertyList.filter(item => {
       if (geolib.isPointInside(item.coordinates, polygonArr)) {
         return item;
       }
     });
-    resolve(listProperties);
-  });
-  return payload;
+  return listProperties;
 }
