@@ -144,7 +144,7 @@ class MapSearch extends Component {
               strokeWidth = {2}/>
             )
           }
-          {(this.state.polygon.length > 0) &&
+          {(this.props.polygon.length > 0) &&
             (<MapView.Polygon coordinates = {this.state.polygon}
               strokeWidth = {2}
             />)

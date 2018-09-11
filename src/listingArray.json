@@ -53,7 +53,7 @@
       "currency" : "usd",
       "leaseType" : "residential",
       "price" : 500,
-      "size" : "55 sqm",
+      "size" : 55,
       "text" : "Serviced apartment in the heart of Thao Dien. Affordable and fine dining near by.",
       "type" : "serviced apartment"
     },
@@ -84,7 +84,7 @@
       "currency" : "usd",
       "leaseType" : "residential",
       "price" : 1200,
-      "size" : "180 sqm",
+      "size" : 180,
       "text" : "Lovely apartment for rent. Pool, gym, east side. Great location 5 minutes from D1",
       "type" : "high-rise apartment"
     },
@@ -115,7 +115,7 @@
       "currency" : "usd",
       "leaseType" : "residential",
       "price" : 500,
-      "size" : "30 sqm",
+      "size" : 30,
       "text" : "Fully furnished room with gym, sauna, cleaning, change bedsheet, 24 hours security, internet, cable tv, and parking ",
       "type" : "serviced apartment"
     },
@@ -146,7 +146,7 @@
       "currency" : "usd",
       "leaseType" : "residential",
       "price" : 700,
-      "size" : "50 sqm",
+      "size" : 50,
       "text" : "The Manor located in the heart of Binh Thanh. Fully furnished room with gym, sauna, cleaning, change bedsheet, 24 hours security, internet, cable tv, and parking ",
       "type" : "high-rise apartment"
     },
@@ -177,7 +177,7 @@
       "currency" : "usd",
       "leaseType" : "residential",
       "price" : 2100,
-      "size" : "210 sqm",
+      "size" : 210,
       "text" : "Inspired by the famous Central Park in New York City, Vinhomes Central Park proudly brings to its residents the ideal living environment - harmony with nature combined with a five-star city lifestyle. Vinhomes Central Park is a place to build true life values worthy of this most modern and classy township development. ",
       "type" : "high-rise apartment"
     },
@@ -208,7 +208,7 @@
       "currency" : "usd",
       "leaseType" : "residential",
       "price" : 800,
-      "size" : "30 sqm",
+      "size" : 30,
       "text" : "Mimosa serviced aparment proudly brings to its residents the ideal living environment - harmony with nature combined with a five-star city lifestyle. Mimosa is a place to build true life values worthy of this most modern and classy township development. ",
       "type" : "studio apartment"
     },
@@ -270,7 +270,7 @@
       "currency" : "usd",
       "leaseType" : "residential",
       "price" : 600,
-      "size" : "45 sqm",
+      "size" : 45,
       "text" : "Colorful serviced apartment in perfectly located in Thao Dien. Affordable and fine dining near by.",
       "type" : "serviced apartment"
     },
@@ -301,7 +301,7 @@
       "currency" : "usd",
       "leaseType" : "residential",
       "price" : 350,
-      "size" : "40 sqm",
+      "size" : 40,
       "text" : "The Birch Heaven located in the heart of Binh Thanh. Fully furnished room with gym, sauna, cleaning, change bedsheet, 24 hours security, internet, cable tv, and parking ",
       "type" : "high-rise apartment"
     },
@@ -332,7 +332,7 @@
       "currency" : "usd",
       "leaseType" : "residential",
       "price" : 700,
-      "size" : "50 sqm",
+      "size" : 50,
       "text" : "Huong Vy Suites in the heart of Binh Thanh. Fully furnished room with gym, sauna, cleaning, change bedsheet, 24 hours security, internet, cable tv, and parking ",
       "type" : "high-rise apartment"
     },

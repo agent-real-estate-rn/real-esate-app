@@ -118,7 +118,7 @@ class FilterContent extends Component {
   }
 }
 const mapStateToProps = (state) => {
-  return {...state}
+  return {...state.searchOnMap}
 }
 export default connect(
   mapStateToProps,

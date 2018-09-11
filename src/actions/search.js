@@ -26,41 +26,29 @@ export default function mapDispatchToSearchProps(dispatch, ownprops) {
       dispatch({
         type: 'INITIAL_MAP',
         initialRegion,
-        propertyList: staticData
+        propertyList: staticData.propertyList
       });
     },
 
     getFilteredPropertiesList: (propertyList, polygonArr, filterObj) => {
       let listWithFilter;
-      if (polygonArr.length > 0) {}
-        // let polygonFilter = filterByPolygon(propertyList, polygonArr);
-        //   if (filterObj && Object.keys(filterObj).length > 0) {
-        //     listWithFilter = filterProperties(filterObj, polygonFilter);
-        //   } else {
-        //     listWithFilter = data;
-        //   }
-        //   dispatch({
-        //     type: 'FILTER_PROPERTIES_BY_CATEGORIES',
-        //     properties: listWithFilter
-        //   });
-        const payload = new Promise((resolve) => {
-          const listProperties = propertyList.map((item) => {
-            // if (geolib.isPointInside(item.coordinates, polygonArr)) {
-            //   return item;
-            // }
-            return item;
+      if (polygonArr.length > 0) {
+        filterByPolygon(propertyList, polygonArr).then(data => {
+          if (filterObj && Object.keys(filterObj).length > 0) {
+            listWithFilter = filterProperties(filterObj, data);
+          } else {
+            listWithFilter = data;
+          }
+          dispatch({
+            type: 'FILTER_PROPERTIES_FULFILLED',
+            listWithFilter
           });
-          resolve(listProperties);
         });
         dispatch({
-          type: 'FILTER_PROPERTIES',
-          payload,
-          polygon: polygonArr
+          type: 'FILTER_PROPERTIES_PENDING',
+          polygon: polygonArr,
         });
-        // dispatch({
-        //   type: 'FILTER_PROPERTIES',
-        //   polygon: polygonArr
-        // });
+      }
     },
 
     resetPropertyList: () => {
@@ -128,10 +116,13 @@ const filterProperties = (filterObj, propertyList) => {
 }
 
 const filterByPolygon = (propertyList, polygonArr) => {
+  const payload = new Promise((resolve) => {
     let listProperties = propertyList.filter(item => {
       if (geolib.isPointInside(item.coordinates, polygonArr)) {
         return item;
       }
     });
-  return listProperties;
+    resolve(listProperties);
+  });
+  return payload;
 }
