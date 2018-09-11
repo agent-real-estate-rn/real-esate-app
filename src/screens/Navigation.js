@@ -48,16 +48,14 @@ const Tabs = createBottomTabNavigator({
     screen: SearchStack,
     navigationOptions: {
       tabBarLabel: 'Search',
-      tabBarIcon: ({tintColor, focused}) =>
-        (<View style={[{borderTopWidth: 4, flex: 1, justifyContent: 'flex-start', width: '100%'},(focused) ? {borderTopColor: tintColor} : {borderTopColor:'transparent'}]}>
-          <Icon
-            name='search'
-            type='material_community'
-            color={tintColor}
-            iconStyle={{fontSize: 30, justifyContent: 'center'}}
-            containerStyle={{alignItems: 'center'}}
-          />
-        </View>)
+      tabBarIcon: ({tintColor}) =>
+        (<Icon
+          name='search'
+          type='material_community'
+          color={tintColor}
+          iconStyle={{fontSize: 30, justifyContent: 'center'}}
+          containerStyle={{alignItems: 'center'}}
+        />)
     }
   },
   SubscriptionStack: {
@@ -65,15 +63,13 @@ const Tabs = createBottomTabNavigator({
     navigationOptions: {
       tabBarLabel: 'Subscriptions',
       tabBarIcon: ({tintColor, focused}) =>
-        (<View style={[{borderTopWidth: 4, flex: 1, justifyContent: 'flex-start', width: '100%'},(focused) ? {borderTopColor: tintColor} : {borderTopColor:'transparent'}]}>
-          <Icon
-            name='chat'
-            type='material_community'
-            color={tintColor}
-            iconStyle={{fontSize: 30, justifyContent: 'center'}}
-            containerStyle={{alignItems: 'center'}}
-          />
-        </View>)
+        (<Icon
+          name='chat'
+          type='material_community'
+          color={tintColor}
+          iconStyle={{fontSize: 30, justifyContent: 'center'}}
+          containerStyle={{alignItems: 'center'}}
+        />)
       }
   }
 }, {

@@ -109,7 +109,7 @@ class MapSearch extends Component {
   }
 
   getSnapShot() {
-    console.log(this.props);
+    // console.log(this.props);
     // const snapshot = await Expo.takeSnapshotAsync(this.map, {
     //   result: 'file',
     //   format: 'jpeg'
@@ -121,7 +121,6 @@ class MapSearch extends Component {
   }
 
   render() {
-    console.log(this.props);
     return (
       <View style = {[{flex: 1, position: 'relative', opacity: 1}]}>
         <MapView

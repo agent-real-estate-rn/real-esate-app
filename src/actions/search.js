@@ -21,12 +21,12 @@ export default function mapDispatchToSearchProps(dispatch, ownprops) {
       });
     },
 
-    getFilteredPropertiesList: (propertyList, polygonArr, filter) => {
+    getFilteredPropertiesList: (propertyList, polygonArr, filterObj) => {
       let listWithFilter;
       if (polygonArr.length > 0) {
         filterByPolygon(propertyList, polygonArr).then(data => {
-          if (filter && Object.keys(filter).length > 0) {
-            listWithFilter = filterProperties(filter, data);
+          if (filterObj && Object.keys(filterObj).length > 0) {
+            listWithFilter = filterProperties(filterObj, data);
           } else {
             listWithFilter = data;
           }
@@ -58,9 +58,6 @@ export default function mapDispatchToSearchProps(dispatch, ownprops) {
         propertiesFulfilled: filter
       });
     },
-
-    filter
-
   }
 }
 
@@ -71,7 +68,7 @@ const uploadImageAsync = async (uuid, uri) => {
 
   const snapshot = await ref.put(blob);
   return snapshot.downloadURL;
-  
+
 };
 const saveSubscription = (uuid, info) => {
   const ref = firebase.database().ref('subscription/').child(uuid);
