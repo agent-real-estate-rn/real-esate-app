@@ -22,20 +22,6 @@ export default function mapDispatchToSearchProps(dispatch, ownprops) {
     },
 
     getFilteredPropertiesList: (propertyList, polygonArr, filter) => {
-      // const payload = new Promise((resolve) => {
-      //   let listProperties = propertyList.filter(item => {
-      //     if (geolib.isPointInside(item.coordinates, polygonArr)) {
-      //       return item;
-      //     }
-      //   });
-
-      //   if (filter && Object.keys(filter).length > 0) {
-      //     listProperties = filterProperties(filter, listProperties);
-      //   }
-
-      //   resolve(listProperties);
-        
-      // });
       let listWithFilter;
       if (polygonArr.length > 0) {
         filterByPolygon(propertyList, polygonArr).then(data => {
@@ -69,7 +55,7 @@ export default function mapDispatchToSearchProps(dispatch, ownprops) {
     updateFilter(filter) {
       dispatch({
         type: 'GET_FILTER',
-        filter
+        propertiesFulfilled: filter
       });
     },
 
