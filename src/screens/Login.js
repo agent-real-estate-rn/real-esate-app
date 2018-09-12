@@ -65,6 +65,7 @@ class LoginScreen extends Component {
                 label="Email"
                 multiline={false}
                 value={this.state.email}
+                textStyle={{color: '#fff'}}
                 textContentType='emailAddress'
                 onChangeText={email => this.setState({ email })}
               />
@@ -76,6 +77,7 @@ class LoginScreen extends Component {
                 onChangeText={password => this.setState({ password })}
                 textContentType='password'
                 secureTextEntry
+                textStyle={{color: '#fff'}}
                 underlineColorAndroid="transparent"
                 textContentType="password"
               />

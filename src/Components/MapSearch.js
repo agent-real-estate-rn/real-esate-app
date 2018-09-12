@@ -183,7 +183,7 @@ class MapSearch extends Component {
             activeOpacity={0.8}
             style = {[styles.absoluteBtn, styles.getListBtn]}
             onPress = {() => this.getSnapShot()}
-          ><Text style={{color: '#fff'}}>Get snapshot!</Text>
+          ><Text style={{color: '#fff'}}>Save search!</Text>
           </TouchableOpacity>
         }
         {this.props.loading && <Loading/>}

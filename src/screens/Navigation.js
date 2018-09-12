@@ -101,6 +101,22 @@ const Tabs = createBottomTabNavigator({
       </View>)
       }
   },
+  PublishStack: {
+    screen: PublishScreen,
+    navigationOptions: {
+      tabBarLabel: 'Publish',
+      tabBarIcon: ({tintColor, focused}) =>
+      (<View style={[{borderTopWidth: 4, flex: 1, justifyContent: 'flex-start', width: '100%'},(focused) ? {borderTopColor: tintColor} : {borderTopColor:'transparent'}]}>
+        <Icon 
+          name='edit' 
+          type='font-awesome' 
+          color={tintColor} 
+          iconStyle={{fontSize: 30, justifyContent: 'center'}} 
+          containerStyle={{alignItems: 'center'}}
+        />
+      </View>)
+    }
+  },
   ProfileStack: {
     screen: ProfileStack,
     navigationOptions: {
