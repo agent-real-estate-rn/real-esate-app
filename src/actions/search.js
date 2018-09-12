@@ -73,19 +73,19 @@ export default function mapDispatchToSearchProps(dispatch, ownprops) {
   }
 }
 
-const uploadImageAsync = async (uuid, uri) => {
-  const ref = firebase.storage().ref().child(uuid);
-  const response = await fetch(uri);
-  const blob = await response.blob();
+// const uploadImageAsync = async (uuid, uri) => {
+//   const ref = firebase.storage().ref().child(uuid);
+//   const response = await fetch(uri);
+//   const blob = await response.blob();
 
-  const snapshot = await ref.put(blob);
-  return snapshot.downloadURL;
+//   const snapshot = await ref.put(blob);
+//   return snapshot.downloadURL;
 
-};
-const saveSubscription = (uuid, info) => {
-  const ref = firebase.database().ref('subscription/').child(uuid);
+// };
+// const saveSubscription = (uuid, info) => {
+//   const ref = firebase.database().ref('subscription/').child(uuid);
 
-}
+// }
 
 
 const filterProperties = (filterObj, propertyList) => {

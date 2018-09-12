@@ -9,6 +9,7 @@ import PropertyDetailScreen from './PropertyDetailScreen';
 import SearchScreen from './SearchScreen';
 import ListView from './ListView';
 import SplashScreen from './SplashScreen';
+import ProfileScreen from './ProfileScreen';
 
 
 const SubscriptionStack = createStackNavigator({
@@ -40,6 +41,12 @@ const SearchStack = createStackNavigator({
 }, {
   navigationOptions: {
     title: 'Search'
+  }
+});
+
+const ProfileStack = createStackNavigator({
+  ProfileScreen: {
+    screen: ProfileScreen
   }
 });
 
@@ -75,6 +82,22 @@ const Tabs = createBottomTabNavigator({
         />
       </View>)
       }
+  },
+  ProfileStack: {
+    screen: ProfileStack,
+    navigationOptions: {
+      tabBarLabel: 'Profile',
+      tabBarIcon: ({tintColor, focused}) =>
+      (<View style={[{borderTopWidth: 4, flex: 1, justifyContent: 'flex-start', width: '100%'},(focused) ? {borderTopColor: tintColor} : {borderTopColor:'transparent'}]}>
+        <Icon 
+          name='person-outline' 
+          type='material_community' 
+          color={tintColor} 
+          iconStyle={{fontSize: 30, justifyContent: 'center'}} 
+          containerStyle={{alignItems: 'center'}}
+        />
+      </View>)
+    }
   }
 }, {
   labeled: true,
@@ -116,7 +139,7 @@ const MainStack = createSwitchNavigator({
     screen: Tabs
   }
 }, {
-  initialRouteName: 'Tabs',
+  initialRouteName: 'SplashScreen',
   headerMode: 'none',
   navigationOptions: {
     headerVisible: false,
