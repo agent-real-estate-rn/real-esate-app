@@ -76,7 +76,7 @@ class MapSearch extends Component {
 
   getPolygonAndMarkers() {
     let polygonArr = this.state.panDrag.concat(this.state.panDrag[0]);
-    this.props.getFilteredPropertiesList(this.props.propertyList, polygonArr, this.props.filterCategory);
+    this.props.getFilteredPropertiesList(this.props.propertyList, polygonArr, this.props.filterData);
 
     this.setState({
       isDrawing: !this.state.isDrawing,

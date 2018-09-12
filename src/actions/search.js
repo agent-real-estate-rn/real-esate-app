@@ -91,19 +91,19 @@ const saveSubscription = (uuid, info) => {
 const filterProperties = (filterObj, propertyList) => {
   const {bath, beds, cleaning, priceRange, security, size} = filterObj;
   let filteredProperties = propertyList.filter((item) => {
-    if (bath > 0 && item.description.bath < bath) {
+    if (bath && item.description.bath !== bath) {
       return false;
     }
-    if (beds  > 0 && item.description.bdrm < beds) {
+    if (beds && item.description.bdrm !== beds) {
       return false;
     }
-    if (cleaning && !item.description.cleaning) {
+    if (!(cleaning && item.description.cleaning)) {
       return false;
     }
     if (priceRange && !(priceRange[0] <= item.description.price <= priceRange[1])) {
       return false;
     }
-    if (security && !item.description.security) {
+    if (!(security && item.description.security)) {
       return false;
     }
     if (size && !(size[0] <= item.description.size <= size[1])) {

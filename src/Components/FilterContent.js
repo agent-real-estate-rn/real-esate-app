@@ -10,8 +10,8 @@ class FilterContent extends Component {
 
     this.state = {
        priceRange: [0,2000],
-       beds: 0,
-       bath: 0,
+       beds: null,
+       bath: null,
        size: [0,400],
        parking: false,
        security: false,
