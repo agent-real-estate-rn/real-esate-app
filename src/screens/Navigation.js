@@ -5,6 +5,7 @@ import { Icon } from 'react-native-elements';
 import LoginScreen from './Login';
 import SignupScreen from './Signup';
 import SubscriptionScreen from './SubscriptionScreen';
+import PublishScreen from './PublishScreen'
 import PropertyDetailScreen from './PropertyDetailScreen';
 import SearchScreen from './SearchScreen';
 import ListView from './ListView';
@@ -44,9 +45,26 @@ const SearchStack = createStackNavigator({
   }
 });
 
+
 const ProfileStack = createStackNavigator({
   ProfileScreen: {
     screen: ProfileScreen
+  }
+},
+{
+  navigationOptions: {
+    title: 'Profile'
+  }
+});
+
+
+const PublishStack = createStackNavigator({
+  PublishScreen: {
+    screen: PublishScreen
+  },
+}, {
+  navigationOptions: {
+    title: 'Publish Listing'
   }
 });
 
@@ -98,7 +116,23 @@ const Tabs = createBottomTabNavigator({
         />
       </View>)
     }
-  }
+  },
+  PublishStack: {
+    screen: PublishStack,
+    navigationOptions: {
+      tabBarLabel: 'Publish',
+      tabBarIcon: ({tintColor, focused}) =>
+        (<View style={[{borderTopWidth: 4, flex: 1, justifyContent: 'flex-start', width: '100%'},(focused) ? {borderTopColor: tintColor} : {borderTopColor:'transparent'}]}>
+          <Icon 
+            name='edit' 
+            type='font-awesome' 
+            color={tintColor} 
+            iconStyle={{fontSize: 30, justifyContent: 'center'}} 
+            containerStyle={{alignItems: 'center'}}
+          />
+        </View>)
+      }
+  },
 }, {
   labeled: true,
   initialRouteName: 'SearchStack',
