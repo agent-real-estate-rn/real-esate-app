@@ -55,15 +55,15 @@ class FilterContent extends Component {
         />
         <Text> Beds: </Text>
         <ButtonGroup
-          onPress={(selectedIndex)=> this.setState({beds: selectedIndex, hasCategories: true})}
-          selectedIndex={this.state.beds}
+          onPress={(selectedIndex)=> this.setState({beds: selectedIndex + 1, hasCategories: true})}
+          selectedIndex={this.state.beds - 1}
           buttons={[1,2,3,4,'5+']}
           containerStyle={{justifyContent: 'flex-start', height: 30, marginLeft: 0, marginRight: 0}}
         />
         <Text> Bath: </Text>
         <ButtonGroup
-          onPress={(selectedIndex)=> this.setState({bath: selectedIndex, hasCategories: true})}
-          selectedIndex={this.state.bath}
+          onPress={(selectedIndex)=> this.setState({bath: selectedIndex + 1, hasCategories: true})}
+          selectedIndex={this.state.bath - 1}
           buttons={[1,2,3,'4+']}
           containerStyle={{justifyContent: 'flex-start', height: 30, marginLeft: 0, marginRight: 0}}
         />

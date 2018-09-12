@@ -97,13 +97,13 @@ const filterProperties = (filterObj, propertyList) => {
     if (beds && item.description.bdrm !== beds) {
       return false;
     }
-    if (!(cleaning && item.description.cleaning)) {
+    if (cleaning && item.description.cleaning) {
       return false;
     }
     if (priceRange && !(priceRange[0] <= item.description.price <= priceRange[1])) {
       return false;
     }
-    if (!(security && item.description.security)) {
+    if (security && item.description.security) {
       return false;
     }
     if (size && !(size[0] <= item.description.size <= size[1])) {
