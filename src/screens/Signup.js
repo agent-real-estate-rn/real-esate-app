@@ -55,6 +55,7 @@ export default class SignupScreen extends Component {
                 style={loginStyle.input}
                 label="Email"
                 multiline={false}
+                textStyle={{color: '#fff'}}
                 value={this.state.email}
                 textContentType='emailAddress'
                 onChangeText={email => this.setState({ email })}
@@ -67,6 +68,7 @@ export default class SignupScreen extends Component {
                 onChangeText={password => this.setState({ password })}
                 textContentType='password'
                 secureTextEntry
+                textStyle={{color: '#fff'}}
                 underlineColorAndroid="transparent"
                 textContentType="password"
               />

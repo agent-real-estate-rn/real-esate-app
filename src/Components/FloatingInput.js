@@ -26,7 +26,7 @@ export default class FloatingLabelInput extends Component {
   }
 
   render() {
-    const { label, style, ...props } = this.props;
+    const { label, labelStyling, textStyle, style, ...props } = this.props;
     const labelStyle = {
       position: 'absolute',
       left: this._animatedIsFocused.interpolate({
@@ -46,15 +46,16 @@ export default class FloatingLabelInput extends Component {
         outputRange: ['#ccc', '#c8c8c8'],
       }),
     };
+    console.log(this.props.textStyle)
     return (
       <View style={[{position: 'relative', justifyContent: 'center'}, style]}>
-        <Animated.Text style={labelStyle}>
+        <Animated.Text style={[labelStyle, labelStyling]}>
           {label}
         </Animated.Text>
         <TextInput
           {...props}
           multiline={false}
-          style={{fontSize: 16, color: '#fff', height: 30 }}
+          style={[{height: 30 }, textStyle]}
           underlineColorAndroid="transparent"
           onFocus={this.handleFocus}
           onBlur={this.handleBlur}

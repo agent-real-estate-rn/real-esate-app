@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Button, Animated, TouchableOpacity, Easing, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, Easing, StyleSheet } from 'react-native';
 import ListView from './ListView';
 import MapSearch from '../Components/MapSearch';
 import FlipView from 'react-native-flip-view-next';
@@ -62,29 +62,31 @@ export default class SearchScreen extends Component {
 
   renderModalContent = () => (
     <View style={styles.modalContent}>
-      <FilterContent toggleModal={this.toggleModal} applyFilter={this.applyFilter} />
+      <FilterContent toggleModal={this.toggleModal} />
     </View>
   );
 
   frontSide() {
     return (
-      <View style={{flex:1}}>
-        <MapSearch toggleMap={this.flip} filterData={this.state.filterData}/>
+      <View style={{flex:1}} toggleMap={this.flip}>
+        <MapSearch />
         <Modal
-          isVisible={this.state.modalVisible} 
-          style={styles.bottomModal} 
-          onBackdropPress={this.toggleModal} 
-          swipeDirection='right' 
+          isVisible={this.state.modalVisible}
+          style={styles.bottomModal}
+          onBackdropPress={this.toggleModal}
+          swipeDirection='right'
           onSwipe={this.toggleModal}
         >
           {this.renderModalContent()}
         </Modal>
-      </View>);
+      </View>
+    );
   }
 
   backSide() {
     return(<ListView navigation={this.props.navigation}/>);
   }
+
   render() {
     return(
       <FlipView style={{flex: 1}}

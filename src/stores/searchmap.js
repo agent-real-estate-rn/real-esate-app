@@ -4,7 +4,9 @@ const initialState = {
   initialLocation: {},
   propertyList: [],
   filteredPropertiesList: [],
-  snapshotUri: ''
+  snapshotUri: '',
+  filterData: {},
+  polygon: []
 };
 
 export default searchOnMap = (state = initialState, action) => {
@@ -12,18 +14,33 @@ export default searchOnMap = (state = initialState, action) => {
     case 'INITIAL_MAP': {
       return {...state, initialLocation: action.initialRegion, propertyList: action.propertyList};
     };
+
+    // case 'FILTER_PROPERTIES': {
+    //   return {...state, loading: true, polygon: action.polygon}
+    // };
+
     case 'FILTER_PROPERTIES_PENDING': {
-      return {...state, loading: true}
+      return {...state, polygon: action.polygon}
     };
+
     case 'FILTER_PROPERTIES_FULFILLED': {
-      return {...state, loading: false, filteredPropertiesList: action.payload}
-    };
+      console.log(action);
+      return {...state, filteredPropertiesList: action.listWithFilter }
+    }
+
     case 'RESET_PROPERTY_LIST': {
-      return {...state, filteredPropertiesList: []};
+      return {...state, filteredPropertiesList: [], polygon: []};
     };
+
     case 'GET_SNAPSHOT': {
       return {...state, snapshotUri: action.uri};
     };
+
+    case 'GET_FILTER': {
+      return {...state, filterData: action.propertiesFulfilled};
+    };
+
+
     default: return state;
   }
 }

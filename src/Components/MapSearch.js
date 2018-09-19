@@ -1,12 +1,11 @@
 import React, { Component } from "react";
-import { View, Text, TouchableOpacity, Button } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import styles from "../style/searchscreen";
 import { connect } from "react-redux";
 import MapView from "react-native-maps";
-import geolib from "geolib";
 import _ from "lodash";
 import Expo from 'expo';
-import { Icon, SearchBar } from "react-native-elements";
+import { Icon } from "react-native-elements";
 import mapDispatchToSearchProps from "../actions/search";
 import Loading from "./Loading";
 
@@ -35,6 +34,7 @@ class MapSearch extends Component {
     this.drawPolyline = _.throttle(this.drawPolyline, 1000/60);
     this.regionChangeComplete = this.regionChangeComplete.bind(this);
   }
+
   componentDidMount() {
     this.props.getInitialData();
   }
@@ -65,12 +65,6 @@ class MapSearch extends Component {
   }
 
   toggleDrawOnMap() {
-    // markers = this.props.propertyList.map(item => {
-    //   return item.coordinates;
-    // });
-    // this.setState({
-    //   markers: markers
-    // });
     this.props.resetPropertyList();
     this.setState({
       isDrawing: !this.state.isDrawing,
@@ -82,7 +76,7 @@ class MapSearch extends Component {
 
   getPolygonAndMarkers() {
     let polygonArr = this.state.panDrag.concat(this.state.panDrag[0]);
-    this.props.getFilteredPropertiesList(this.props.propertyList, polygonArr);
+    this.props.getFilteredPropertiesList(this.props.propertyList, polygonArr, this.props.filterData);
 
     this.setState({
       isDrawing: !this.state.isDrawing,
@@ -115,9 +109,8 @@ class MapSearch extends Component {
   }
 
   getSnapShot() {
-    console.log(this.props);
-    // console.log(this.map);
-    // const snapshot = await Expo.takeSnapshotAsync(this.map,{
+    // console.log(this.props);
+    // const snapshot = await Expo.takeSnapshotAsync(this.map, {
     //   result: 'file',
     //   format: 'jpeg'
     // });
@@ -134,14 +127,14 @@ class MapSearch extends Component {
           style = {{flex: 1}}
           initialRegion={this.state.location}
           showsUserLocation = {true}
-          showsMyLocationButton = {true} 
+          showsMyLocationButton = {true}
           scrollEnabled = {!this.state.isDrawing}
           onPanDrag = {e => this.panDragMap(e)}
           ref={(map) => this.map = map}
           onRegionChangeComplete={this.regionChangeComplete}
         >
-          {this.props.filteredPropertiesList.map((marker, key) => (
-              <MapView.Marker key = {key}
+          {this.props.filteredPropertiesList.map((marker) => (
+              <MapView.Marker key = {marker.id}
                 coordinate = {marker.coordinates}
               >
               </MapView.Marker>
@@ -151,12 +144,21 @@ class MapSearch extends Component {
               strokeWidth = {2}/>
             )
           }
-          {(this.state.polygon.length > 0) &&
+          {(this.props.polygon.length > 0) &&
             (<MapView.Polygon coordinates = {this.state.polygon}
               strokeWidth = {2}
             />)
           }
         </MapView>
+
+        <TouchableOpacity
+            activeOpacity={0.8}
+            style = {[styles.absoluteBtn, styles.currentLocation]}
+            onPress = {this.getCurrentLocation}
+          >
+            <Icon name='gps-fixed' type = 'material_community' containerStyle = {styles.icon}/>
+        </TouchableOpacity>
+
         { !this.state.mapView ? null :
           <TouchableOpacity
             activeOpacity={0.8}
@@ -181,7 +183,7 @@ class MapSearch extends Component {
             activeOpacity={0.8}
             style = {[styles.absoluteBtn, styles.getListBtn]}
             onPress = {() => this.getSnapShot()}
-          ><Text style={{color: '#fff'}}>Get snapshot!</Text>
+          ><Text style={{color: '#fff'}}>Save search!</Text>
           </TouchableOpacity>
         }
         {this.props.loading && <Loading/>}

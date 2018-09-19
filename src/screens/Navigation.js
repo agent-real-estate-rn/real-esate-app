@@ -10,6 +10,7 @@ import PropertyDetailScreen from './PropertyDetailScreen';
 import SearchScreen from './SearchScreen';
 import ListView from './ListView';
 import SplashScreen from './SplashScreen';
+import ProfileScreen from './ProfileScreen';
 
 
 const SubscriptionStack = createStackNavigator({
@@ -44,6 +45,19 @@ const SearchStack = createStackNavigator({
   }
 });
 
+
+const ProfileStack = createStackNavigator({
+  ProfileScreen: {
+    screen: ProfileScreen
+  }
+},
+{
+  navigationOptions: {
+    title: 'Profile'
+  }
+});
+
+
 const PublishStack = createStackNavigator({
   PublishScreen: {
     screen: PublishScreen
@@ -61,14 +75,14 @@ const Tabs = createBottomTabNavigator({
       tabBarLabel: 'Search',
       tabBarIcon: ({tintColor, focused}) =>
         (<View style={[{borderTopWidth: 4, flex: 1, justifyContent: 'flex-start', width: '100%'},(focused) ? {borderTopColor: tintColor} : {borderTopColor:'transparent'}]}>
-          <Icon 
-            name='search' 
-            type='material_community' 
-            color={tintColor} 
-            iconStyle={{fontSize: 30, justifyContent: 'center'}} 
-            containerStyle={{alignItems: 'center'}}
-          />
-        </View>)
+        <Icon 
+          name='search' 
+          type='material_community' 
+          color={tintColor} 
+          iconStyle={{fontSize: 30, justifyContent: 'center'}} 
+          containerStyle={{alignItems: 'center'}}
+        />
+      </View>)
     }
   },
   SubscriptionStack: {
@@ -76,16 +90,48 @@ const Tabs = createBottomTabNavigator({
     navigationOptions: {
       tabBarLabel: 'Subscriptions',
       tabBarIcon: ({tintColor, focused}) =>
-        (<View style={[{borderTopWidth: 4, flex: 1, justifyContent: 'flex-start', width: '100%'},(focused) ? {borderTopColor: tintColor} : {borderTopColor:'transparent'}]}>
-          <Icon 
-            name='chat' 
-            type='material_community' 
-            color={tintColor} 
-            iconStyle={{fontSize: 30, justifyContent: 'center'}} 
-            containerStyle={{alignItems: 'center'}}
-          />
-        </View>)
+      (<View style={[{borderTopWidth: 4, flex: 1, justifyContent: 'flex-start', width: '100%'},(focused) ? {borderTopColor: tintColor} : {borderTopColor:'transparent'}]}>
+        <Icon 
+          name='chat' 
+          type='material_community' 
+          color={tintColor} 
+          iconStyle={{fontSize: 30, justifyContent: 'center'}} 
+          containerStyle={{alignItems: 'center'}}
+        />
+      </View>)
       }
+  },
+  PublishStack: {
+    screen: PublishScreen,
+    navigationOptions: {
+      tabBarLabel: 'Publish',
+      tabBarIcon: ({tintColor, focused}) =>
+      (<View style={[{borderTopWidth: 4, flex: 1, justifyContent: 'flex-start', width: '100%'},(focused) ? {borderTopColor: tintColor} : {borderTopColor:'transparent'}]}>
+        <Icon 
+          name='edit' 
+          type='font-awesome' 
+          color={tintColor} 
+          iconStyle={{fontSize: 30, justifyContent: 'center'}} 
+          containerStyle={{alignItems: 'center'}}
+        />
+      </View>)
+    }
+  },
+  ProfileStack: {
+    screen: ProfileStack,
+    navigationOptions: {
+      tabBarLabel: 'Profile',
+      tabBarIcon: ({tintColor, focused}) =>
+      (<View style={[{borderTopWidth: 4, flex: 1, justifyContent: 'flex-start', width: '100%'},(focused) ? {borderTopColor: tintColor} : {borderTopColor:'transparent'}]}>
+        <Icon 
+          name='person-outline' 
+          type='material_community' 
+          color={tintColor} 
+          iconStyle={{fontSize: 30, justifyContent: 'center'}} 
+          containerStyle={{alignItems: 'center'}}
+        />
+      </View>)
+    }
   },
   PublishStack: {
     screen: PublishStack,
@@ -103,7 +149,6 @@ const Tabs = createBottomTabNavigator({
         </View>)
       }
   },
-
 }, {
   labeled: true,
   initialRouteName: 'SearchStack',

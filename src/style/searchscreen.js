@@ -24,7 +24,7 @@ export default styles = StyleSheet.create({
   },
   drawButton: {
     right: 10,
-    top: 20,
+    top: 100,
     width: 60,
     height: 60
   },
@@ -43,8 +43,14 @@ export default styles = StyleSheet.create({
   },
   doneBtn: {
     right: 10,
-    top: 100,
+    top: 180,
     width: 60,
     height: 60,
+  },
+  currentLocation: {
+    right: 10,
+    top: 20,
+    width: 60,
+    height: 60
   }
 });

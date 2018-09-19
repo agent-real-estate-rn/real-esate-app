@@ -86,7 +86,7 @@ export default class PublishScreen extends Component {
           <View style={{marginTop:20}}><Camera /></View>
 
           <TouchableOpacity
-            style={styles.btn}
+            style={[styles.btn, {marginBottom: 30}]}
             activeOpacity={0.9}
             onPress={()=>alert('Listing Successfully Published')}
           >
@@ -94,7 +94,7 @@ export default class PublishScreen extends Component {
           </TouchableOpacity>
           </View>
         </ScrollView>
-        <KeyboardAvoidingView behavior="padding" enabled />
+        {/* <KeyboardAvoidingView behavior="padding" enabled /> */}
         
       </View>
       </DismissKeyboard>
