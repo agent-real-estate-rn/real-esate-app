@@ -1,4 +1,4 @@
-{
+/*{
   "name": "real-estate-app",
   "version": "0.1.0",
   "private": true,
@@ -42,4 +42,4 @@
     "redux-promise-middleware": "^5.1.1",
     "redux-thunk": "^2.3.0"
   }
-}
+}*/
